@@ -1,0 +1,433 @@
+/* =====================================================================
+   ♡ Una cartita para ti · habitación rosita
+   ===================================================================== */
+
+.cartita { --moldura: clamp(28px, 5vh, 46px); --sobre: min(80vw, 60vh, 520px); overflow-x: clip; }
+
+/* ---------- Escenario ---------- */
+.escena-cuarto__pared {
+  inset: 0;
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.75) 1.6px, transparent 2.1px) 17px 20px / 34px 40px,
+    repeating-linear-gradient(90deg, #ffd6e7 0 34px, #ffe6ef 34px 68px);
+}
+.escena-cuarto__luz {
+  inset: 0;
+  background:
+    radial-gradient(ellipse 42% 50% at 50% 58%, rgb(255 246 236 / 0.92), rgb(255 246 236 / 0) 72%),
+    linear-gradient(180deg, rgb(255 255 255 / 0) 60%, rgb(200 90 130 / 0.08));
+}
+.escena-cuarto__moldura {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--moldura);
+  background: linear-gradient(180deg, #fffaf4, #fbe9e3);
+  box-shadow: 0 2px 0 #f3d4dd, 0 6px 14px rgb(200 90 130 / 0.12);
+  z-index: 2;
+}
+.escena-cuarto__moldura-encaje { position: absolute; left: 0; right: 0; top: 100%; --t: 20px; --c: #fffaf4; }
+.escena-cuarto__guirnalda { top: calc(var(--moldura) + 8px); left: 0; width: 100%; height: auto; z-index: 1; }
+
+/* Ventana */
+.escena-cuarto__ventana {
+  left: 5%;
+  top: 22%;
+  width: clamp(140px, 15vw, 280px);
+  aspect-ratio: 0.8;
+}
+.escena-cuarto__vidrio {
+  position: absolute;
+  inset: 4% 9% 10%;
+  overflow: hidden;
+  border: clamp(6px, 0.7vw, 10px) solid #fffaf4;
+  border-radius: 50% 50% 6px 6px / 30% 30% 6px 6px;
+  background: linear-gradient(180deg, #e7ddfa 0%, #ffe3ee 70%, #fff2ea 100%);
+  box-shadow: 0 0 0 2px #f3d4dd, inset 0 0 18px rgb(255 255 255 / 0.8), var(--sombra-2);
+}
+.escena-cuarto__vidrio::before, .escena-cuarto__vidrio::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  background: #fffaf4;
+}
+.escena-cuarto__vidrio::before { left: calc(50% - 3px); top: 0; bottom: 0; width: 6px; }
+.escena-cuarto__vidrio::after { top: 52%; left: 0; right: 0; height: 6px; }
+.escena-cuarto__nube { position: absolute; opacity: 0.95; }
+.escena-cuarto__nube--1 { width: 70%; top: 18%; left: -14%; animation: nube-ventana 26s linear infinite alternate; }
+.escena-cuarto__nube--2 { width: 46%; top: 40%; right: -10%; animation: nube-ventana 34s linear -10s infinite alternate-reverse; }
+@keyframes nube-ventana { from { translate: -10% 0; } to { translate: 18% 0; } }
+.escena-cuarto__cinna { position: absolute; z-index: 1; right: 6%; bottom: 4%; width: 44%; }
+.escena-cuarto__cortina {
+  position: absolute;
+  top: -2%;
+  bottom: 4%;
+  width: 36%;
+  z-index: 3;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 0.25), transparent 30%, rgb(200 90 130 / 0.15)),
+    repeating-linear-gradient(90deg, #f7a9c6 0 9px, #f29bbb 9px 18px);
+  box-shadow: var(--sombra-1);
+}
+.escena-cuarto__cortina--izq { left: -6%; clip-path: polygon(0 0, 100% 0, 78% 30%, 34% 52%, 66% 74%, 100% 100%, 0 100%); }
+.escena-cuarto__cortina--der { right: -6%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 34% 74%, 66% 52%, 22% 30%); }
+.escena-cuarto__lazo { position: absolute; z-index: 4; top: 48%; }
+.escena-cuarto__lazo--izq { left: 0; rotate: -14deg; }
+.escena-cuarto__lazo--der { right: 0; rotate: 14deg; }
+.escena-cuarto__repisa {
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  bottom: 6%;
+  height: 14px;
+  z-index: 4;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #fffaf4, #f6dfe2);
+  box-shadow: 0 6px 10px rgb(200 90 130 / 0.2);
+}
+
+/* Cuadro */
+.escena-cuarto__cuadro { right: 7%; top: 24%; width: clamp(84px, 8.5vw, 150px); transform-origin: 50% 0; filter: drop-shadow(0 10px 14px rgb(200 90 130 / 0.25)); }
+.escena-cuarto__cuadro svg { overflow: visible; }
+.escena-cuarto__cuadro-mono { position: absolute; top: -12%; left: 50%; translate: -50% 0; }
+.escena-cuarto__corazon-pared { opacity: 0.75; }
+.escena-cuarto__corazon-pared--1 { top: 60%; left: 21%; width: 20px; rotate: -12deg; }
+.escena-cuarto__corazon-pared--2 { top: 18%; right: 22%; width: 16px; rotate: 10deg; }
+
+/* Zócalo, piso y alfombra */
+.escena-cuarto__zocalo {
+  left: 0;
+  right: 0;
+  bottom: 8vh;
+  height: 20vh;
+  background:
+    linear-gradient(180deg, #fffaf4 0 12px, #f3d4dd 12px 14px, transparent 14px),
+    repeating-linear-gradient(90deg, #fbe7e6 0 2px, #fff5f1 2px 170px),
+    #fff5f1;
+  box-shadow: inset 0 -10px 18px rgb(200 90 130 / 0.08);
+}
+.escena-cuarto__piso {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8vh;
+  background:
+    linear-gradient(180deg, rgb(150 60 95 / 0.18), transparent 8px),
+    repeating-linear-gradient(90deg, #eaa9bf 0 2px, #f4bfd1 2px 140px);
+}
+.escena-cuarto__alfombra {
+  left: 50%;
+  bottom: 1vh;
+  width: min(80vw, 820px);
+  height: 11vh;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #fffaf4 0 52%, #f7a9c6 53% 57%, #fffaf4 58% 66%, rgb(255 250 244 / 0) 67%);
+}
+
+/* ---------- Composición ---------- */
+.cartita__composicion {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  min-height: 100svh;
+  padding: max(clamp(78px, 15vh, 150px), calc(var(--moldura) + 7.4vw + 8px)) 20px clamp(10px, 3vh, 34px);
+}
+.cartita__titulo { font-size: clamp(1.8rem, min(3.4vw, 6.6vh), 3.3rem); text-align: center; }
+.cartita__ante { display: block; margin-bottom: 0.15em; font-size: clamp(1.3rem, min(2vw, 4vh), 2rem); }
+
+.cartita__mesa-zona {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: end;
+  padding-top: 4vh;
+}
+
+/* ---------- Sobre ---------- */
+.sobre-boton { position: relative; z-index: 2; display: block; border-radius: 14px; outline-offset: 10px; }
+.sobre-boton.esta-abierto { cursor: default; }
+.sobre {
+  position: relative;
+  width: var(--sobre);
+  aspect-ratio: 1.5;
+  perspective: 1100px;
+  transition: transform 0.7s var(--ease-salida);
+}
+.sobre-boton:not(.esta-abierto) .sobre { animation: sobre-espera 7s ease-in-out 2s infinite; }
+@keyframes sobre-espera {
+  0%, 82%, 100% { rotate: 0deg; }
+  86% { rotate: -1.4deg; }
+  90% { rotate: 1.2deg; }
+  94% { rotate: -0.6deg; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .sobre-boton:not(.esta-abierto):hover .sobre { transform: translateY(-8px) rotate(-1deg); }
+  .sobre-boton:not(.esta-abierto):hover .sobre__solapa-anticipo { transform: rotateX(24deg); }
+  .sobre-boton:not(.esta-abierto):hover .sobre__mono { scale: 1.06; }
+}
+.sobre-boton:not(.esta-abierto):focus-visible .sobre__solapa-anticipo { transform: rotateX(24deg); }
+.sobre-boton:not(.esta-abierto):active .sobre { transform: scale(0.98); transition-duration: 0.15s; }
+
+.sobre__fondo {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.25) 2px, transparent 2.5px) 0 0 / 18px 18px,
+    linear-gradient(180deg, #e98fb0, #f3abc5);
+  box-shadow: var(--sombra-3);
+}
+.sobre__carta {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 5%;
+  height: 88%;
+  z-index: 2;
+  display: grid;
+  align-content: start;
+  gap: 6%;
+  padding: 7% 9%;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #fffdfa, var(--crema));
+  box-shadow: 0 2px 8px rgb(150 60 95 / 0.18);
+}
+.sobre__carta-para { font-family: var(--f-mano); font-size: clamp(1rem, 2.6vh, 1.45rem); font-weight: 600; color: var(--tinta); }
+.sobre__carta-lineas {
+  display: block;
+  height: 60%;
+  background: repeating-linear-gradient(180deg, transparent 0 13px, rgb(242 138 174 / 0.35) 13px 14px);
+}
+.sobre__bolsillo { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; overflow: visible; }
+.sobre__remitente {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 3.5%;
+  text-align: center;
+  font-family: var(--f-mano);
+  font-size: clamp(1rem, 2.6vh, 1.45rem);
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+.sobre__solapa-zona {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 52%;
+  transform-style: preserve-3d;
+}
+.sobre__solapa-anticipo {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  transition: transform 0.7s var(--ease-salida);
+}
+.sobre__solapa {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+}
+.sobre__solapa-cara {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  backface-visibility: hidden;
+}
+.sobre__solapa-cara--dorso { transform: rotateX(180deg); }
+.sobre__sello {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 17%;
+  margin: -8.5% 0 0 -8.5%;
+  backface-visibility: hidden;
+  filter: drop-shadow(0 3px 3px rgb(120 30 60 / 0.35));
+}
+.sobre__sello svg { width: 100%; height: auto; }
+
+.sobre__cinta { position: absolute; z-index: 5; left: 0; right: 0; top: 70%; height: 8%; pointer-events: none; }
+.sobre__cinta-mitad {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(180deg, #ee7e9b, #dc5577);
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.35), 0 0 0 1.5px rgb(91 59 68 / 0.5);
+}
+.sobre__cinta-mitad--izq { left: 0; border-radius: 2px 0 0 2px; }
+.sobre__cinta-mitad--der { right: 0; border-radius: 0 2px 2px 0; }
+.sobre__mono {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26%;
+  aspect-ratio: 1.2;
+  translate: -50% -50%;
+  transition: scale 0.6s var(--ease-salida);
+  filter: drop-shadow(0 4px 4px rgb(120 30 60 / 0.25));
+}
+.sobre__mono > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform-origin: 50% 45%; }
+
+/* Mesita */
+.cartita__mesa {
+  position: relative;
+  z-index: 1;
+  width: min(calc(var(--sobre) * 1.32), calc(100vw - 16px));
+  height: clamp(40px, 9vh, 92px);
+  margin-top: calc(var(--sobre) * -0.05);
+}
+.cartita__mesa::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 44%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 40%, #fffaf4, #f6e0e3);
+  box-shadow: 0 0 0 2px #f3d4dd;
+}
+.cartita__mantel {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  top: 22%;
+  bottom: 0;
+  background:
+    radial-gradient(circle, rgb(242 138 174 / 0.35) 2px, transparent 2.5px) 0 0 / 16px 16px,
+    #fffaf4;
+  border-radius: 0 0 46% 46% / 0 0 30% 30%;
+  -webkit-mask:
+    radial-gradient(circle 9px at 9px calc(100% - 9px), #000 97%, transparent) 0 100% / 18px 18px repeat-x,
+    linear-gradient(#000, #000) 0 0 / 100% calc(100% - 9px) no-repeat;
+  mask:
+    radial-gradient(circle 9px at 9px calc(100% - 9px), #000 97%, transparent) 0 100% / 18px 18px repeat-x,
+    linear-gradient(#000, #000) 0 0 / 100% calc(100% - 9px) no-repeat;
+  filter: drop-shadow(0 6px 8px rgb(200 90 130 / 0.2));
+}
+
+.cartita__melody {
+  position: absolute;
+  z-index: 3;
+  right: calc(50% - var(--sobre) * 0.66 - clamp(70px, 9vw, 150px));
+  bottom: 4%;
+  width: clamp(80px, min(10vw, 20vh), 170px);
+}
+.cartita__melody .personaje-reactivo { display: block; }
+
+.cartita__pista {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: clamp(4px, 1.4vh, 14px);
+  font-size: clamp(1.15rem, min(1.5vw, 3.2vh), 1.4rem);
+  color: var(--tinta-suave);
+}
+
+/* ---------- Hoja para leer ---------- */
+.carta-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: radial-gradient(circle at 50% 40%, rgb(255 242 247 / 0.78), rgb(240 160 192 / 0.66));
+  backdrop-filter: blur(6px);
+}
+.carta-papel {
+  --lh: clamp(1.9rem, min(2.8vw, 5.2vh), 2.3rem);
+  position: relative;
+  width: min(680px, 100%);
+  max-height: calc(100svh - 36px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, transparent 0 46px, rgb(217 59 92 / 0.3) 46px 48px, transparent 48px),
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--lh) - 1px), rgb(242 138 174 / 0.28) calc(var(--lh) - 1px) var(--lh)),
+    linear-gradient(180deg, #fffdfa, var(--crema));
+  background-attachment: local;
+  box-shadow: var(--sombra-3), 0 0 0 1px rgb(242 138 174 / 0.25);
+}
+.carta-papel__contenido {
+  position: relative;
+  padding: calc(var(--lh) * 1.4) clamp(20px, 4vw, 48px) calc(var(--lh) * 0.8) clamp(60px, 7vw, 76px);
+}
+.carta-papel__mono { position: absolute; top: 6px; left: 6px; rotate: -18deg; }
+.carta-papel__estampilla {
+  position: absolute;
+  top: 14px;
+  right: 56px;
+  width: clamp(60px, 7vw, 82px);
+  padding: 5px;
+  rotate: 6deg;
+  background: #fff;
+  box-shadow: var(--sombra-1);
+  outline: 2px dotted var(--rosa-400);
+  outline-offset: -3px;
+}
+.carta-papel__estampilla > * { background: var(--rosa-100); }
+.carta-papel__de { font-family: var(--f-script); font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: var(--lh); color: var(--cereza-suave); }
+.carta-papel__texto {
+  margin-bottom: calc(var(--lh) * 0.5);
+  font-family: var(--f-mano);
+  font-size: clamp(1.35rem, min(2.1vw, 3.9vh), 1.7rem);
+  font-weight: 500;
+  line-height: var(--lh);
+  color: var(--tinta);
+  text-wrap: pretty;
+}
+.carta-papel__saludo { font-size: clamp(1.6rem, min(2.5vw, 4.6vh), 2rem); font-weight: 700; }
+.carta-papel__despedida { font-weight: 700; color: var(--cereza-oscuro); }
+.carta-papel__firma {
+  font-family: var(--f-script);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  line-height: 1.2;
+  text-align: right;
+  padding-right: 6%;
+  color: var(--cereza-suave);
+}
+.carta-papel__acciones { display: flex; justify-content: center; margin-top: calc(var(--lh) * 0.5); }
+.carta-papel__cerrar {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--tinta-suave);
+  transition: background-color 0.3s, transform 0.4s var(--ease-salida);
+}
+.carta-papel__cerrar:hover { background: var(--rosa-100); transform: rotate(90deg); }
+
+/* ---------- Laptop baja ---------- */
+@media (min-width: 821px) and (max-height: 700px) {
+  .cartita { --sobre: min(80vw, 56vh, 440px); }
+  .escena-cuarto__guirnalda { display: none; }
+  .cartita__composicion { padding-top: 66px; }
+}
+
+/* ---------- Tablet y móvil ---------- */
+@media (max-width: 820px) {
+  .cartita { --sobre: min(84vw, 44svh, 420px); }
+  .escena-cuarto__ventana { left: -6%; top: 50%; width: 30vw; opacity: 0.85; }
+  .escena-cuarto__cuadro { right: 3%; top: 54%; width: 18vw; }
+  .escena-cuarto__guirnalda { height: 60px; }
+  .cartita__composicion { padding-top: 96px; }
+  .cartita__melody { right: -2%; bottom: -6%; width: 22vw; }
+  .carta-papel__estampilla { right: 50px; width: 54px; }
+}

@@ -1,0 +1,208 @@
+/* =====================================================================
+   ♡ Portada · cielo de algodón
+   ===================================================================== */
+
+/* ---------- Escenario de fondo ---------- */
+.escena-inicio__cielo {
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 60% at 72% 48%, #fff7ef 0%, rgb(255 247 239 / 0) 70%),
+    radial-gradient(ellipse 50% 40% at 10% 0%, #f3e6fb 0%, rgb(243 230 251 / 0) 70%),
+    linear-gradient(180deg, #ffe9f1 0%, #ffd6e7 48%, #fbc6da 100%);
+}
+.escena-inicio__rayos {
+  left: 72%;
+  top: 48%;
+  width: 180vmax;
+  height: 180vmax;
+  translate: -50% -50%;
+  background: repeating-conic-gradient(from 0deg, rgb(255 255 255 / 0.3) 0deg 5deg, transparent 5deg 15deg);
+  -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 42%);
+  mask-image: radial-gradient(circle, #000 0%, transparent 42%);
+  animation: girar-lento 180s linear infinite;
+}
+.escena-inicio__patron {
+  inset: 0;
+  background-image: var(--patron-corazones);
+  background-size: 72px;
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
+}
+.escena-inicio__capa { inset: -30px; }
+.escena-inicio__capa > * { position: absolute; }
+
+.escena-inicio__nube { filter: drop-shadow(0 10px 18px rgb(230 140 175 / 0.25)); }
+.escena-inicio__nube--1 { top: 16%; left: 3%; width: clamp(140px, 15vw, 280px); opacity: 0.95; }
+.escena-inicio__nube--2 { top: 9%; left: 42%; width: clamp(100px, 10vw, 190px); opacity: 0.7; animation-delay: -3s; }
+.escena-inicio__nube--3 { top: 24%; left: 88%; width: clamp(120px, 12vw, 220px); opacity: 0.85; animation-delay: -5s; }
+.escena-inicio__nube--frente-1 { bottom: -3vh; left: -5vw; width: clamp(220px, 24vw, 460px); }
+.escena-inicio__nube--frente-2 { bottom: -5vh; right: -6vw; width: clamp(200px, 22vw, 420px); }
+
+.escena-inicio__brillo { width: 22px; animation: particula-titila 4s ease-in-out infinite; --op: 0.9; }
+.escena-inicio__brillo--1 { top: 34%; left: 30%; }
+.escena-inicio__brillo--2 { top: 12%; left: 64%; width: 16px; animation-delay: -1.5s; }
+.escena-inicio__brillo--3 { top: 60%; left: 50%; width: 14px; animation-delay: -2.6s; }
+
+.escena-inicio__colinas { left: 0; right: 0; bottom: 0; width: 100%; height: clamp(150px, 30vh, 330px); }
+
+.escena-inicio__mariposa { width: clamp(34px, 3.4vw, 54px); animation: mariposa-vuelo 7s ease-in-out infinite alternate; }
+.escena-inicio__mariposa--1 { left: 44%; top: 76%; }
+.escena-inicio__mariposa--2 { right: 4%; top: 18%; animation-delay: -3s; }
+@keyframes mariposa-vuelo {
+  0% { translate: 0 0; rotate: -6deg; }
+  50% { translate: 18px -14px; rotate: 6deg; }
+  100% { translate: -6px -26px; rotate: -2deg; }
+}
+
+.escena-inicio__guirnalda { top: 0; left: 0; width: 100%; height: auto; }
+
+/* ---------- Composición ---------- */
+.inicio__composicion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(16px, 3vw, 56px);
+  min-height: 100svh;
+  max-width: 1640px;
+  margin: 0 auto;
+  padding: clamp(64px, 11vh, 130px) clamp(24px, 6vw, 120px) clamp(48px, 9vh, 100px);
+}
+
+.inicio__texto {
+  display: grid;
+  justify-items: start;
+  gap: clamp(10px, 2.2vh, 22px);
+  max-width: 620px;
+}
+.inicio__antetitulo { font-size: clamp(1.7rem, min(2.8vw, 5.4vh), 2.9rem); }
+.inicio__titulo {
+  font-size: clamp(2.8rem, min(6.6vw, 12.5vh), 7.4rem);
+  line-height: 0.95;
+}
+.inicio__titulo-linea,
+.inicio__titulo-nombre { display: block; }
+.inicio__titulo-nombre {
+  position: relative;
+  width: fit-content;
+  color: var(--cereza-suave);
+  padding-right: 0.08em;
+}
+.inicio__subrayado {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.12em;
+  width: 100%;
+  height: 0.22em;
+  overflow: visible;
+}
+.inicio__subtitulo { max-width: 40ch; font-size: clamp(1rem, min(1.35vw, 2.9vh), 1.3rem); }
+.inicio__accion {
+  display: grid;
+  justify-items: start;
+  gap: 0.7rem;
+  margin-top: clamp(4px, 1.4vh, 14px);
+}
+.inicio__pista {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-left: 0.6rem;
+  font-size: clamp(1.1rem, min(1.4vw, 3vh), 1.35rem);
+  color: var(--tinta-suave);
+}
+
+/* ---------- Escenario de personajes ---------- */
+.inicio__escenario-capa {
+  justify-self: center;
+  width: min(100%, 76vh, 680px);
+}
+.inicio__escenario {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+}
+.inicio__escenario > * { position: absolute; }
+
+.inicio__marco { left: 23%; top: 1%; width: 54%; z-index: 1; filter: drop-shadow(0 18px 30px rgb(200 90 130 / 0.25)); }
+.inicio__marco-mono { position: absolute; top: -7%; left: 50%; width: 30%; translate: -50% 0; animation: mono-vaiven 6s ease-in-out infinite alternate; }
+@keyframes mono-vaiven { from { rotate: -4deg; } to { rotate: 4deg; } }
+.inicio__pedestal { left: 11%; right: 11%; bottom: -3%; z-index: 2; }
+
+.inicio__pj { z-index: 3; }
+.inicio__pj-boton { display: block; width: 100%; border-radius: 40%; }
+.inicio__pj-vaiven { animation: flotar 5.5s ease-in-out infinite alternate; }
+
+.inicio__pj--melody { left: 19%; bottom: 20%; width: 62%; z-index: 4; }
+.inicio__pj--melody .inicio__pj-vaiven { animation: respirar 4.6s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes respirar { 0%, 100% { scale: 1 1; } 50% { scale: 1.012 0.99; } }
+
+.inicio__pj--kitty { left: -1%; bottom: 12%; width: 28%; }
+.inicio__pj--kitty .inicio__pj-vaiven { animation: mecerse-base 6.5s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.inicio__pj--piano { right: -2%; bottom: 19%; width: 25%; }
+.inicio__pj--piano .inicio__pj-vaiven { animation: mecerse-base 7s ease-in-out -2s infinite alternate; transform-origin: 50% 100%; }
+@keyframes mecerse-base { from { rotate: -2.5deg; } to { rotate: 2.5deg; } }
+.inicio__pj--flat { left: 63%; bottom: 2%; width: 18%; z-index: 5; }
+.inicio__pj--flat .inicio__pj-vaiven { animation-duration: 4.2s; animation-delay: -1s; }
+.inicio__pj--cinnamoroll { top: 4%; right: -7%; width: 25%; z-index: 5; }
+.inicio__pj--cinnamoroll .inicio__pj-vaiven { animation: volar 6s ease-in-out infinite alternate; }
+.inicio__pj--twinStars { top: 6%; left: -9%; width: 25%; z-index: 5; }
+.inicio__pj--twinStars .inicio__pj-vaiven { animation: volar 7s ease-in-out -2.5s infinite alternate; }
+@keyframes volar {
+  0% { translate: 0 0; rotate: -3deg; }
+  50% { translate: 4px -12px; rotate: 2deg; }
+  100% { translate: -4px -4px; rotate: -1deg; }
+}
+
+.inicio__burbuja { bottom: 98%; left: 0; right: 0; margin-inline: auto; }
+.inicio__burbuja.burbuja--derecha { left: auto; right: 90%; bottom: auto; top: 18%; margin: 0; }
+.inicio__burbuja.burbuja--izquierda { left: 90%; right: auto; bottom: auto; top: 18%; margin: 0; }
+
+/* ---------- Firma ---------- */
+.inicio__firma {
+  position: absolute;
+  z-index: 3;
+  left: clamp(16px, 3vw, 48px);
+  bottom: clamp(10px, 2vh, 22px);
+  font-size: clamp(1.05rem, 1.3vw, 1.3rem);
+  color: var(--tinta-suave);
+}
+
+/* ---------- Transición iris ---------- */
+.inicio__iris {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background:
+    var(--patron-corazones) 0 0 / 72px,
+    radial-gradient(circle at 50% 50%, #fff2f7, var(--rosa) 60%);
+}
+.inicio__iris-centro { filter: drop-shadow(0 12px 20px rgb(200 90 130 / 0.35)); }
+
+/* ---------- Pantallas bajas tipo laptop (1366×600) ---------- */
+@media (min-width: 821px) and (max-height: 700px) {
+  .inicio__composicion { padding-top: 56px; padding-bottom: 40px; }
+  .inicio__texto { gap: 8px; }
+  .inicio__pista { display: none; }
+}
+
+/* ---------- Tablet y móvil ---------- */
+@media (max-width: 820px) {
+  .inicio__composicion {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 8px;
+    padding: 72px 20px 64px;
+    text-align: center;
+  }
+  .inicio__escenario-capa { order: -1; width: min(86vw, 48svh, 460px); }
+  .inicio__texto, .inicio__accion { justify-items: center; }
+  .inicio__titulo-nombre { margin-inline: auto; }
+  .inicio__titulo { font-size: clamp(2.6rem, 12vw, 4.4rem); }
+  .inicio__firma { position: relative; left: auto; bottom: auto; display: block; padding: 0 20px 20px; text-align: center; }
+  .escena-inicio__rayos { left: 50%; top: 32%; }
+  .escena-inicio__guirnalda { height: 64px; }
+}

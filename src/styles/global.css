@@ -1,0 +1,714 @@
+/* =====================================================================
+   ♡ Universo visual compartido
+   Tokens, tipografía, botones, menú, partículas y utilidades.
+   Cada página tiene además su propio archivo de estilos con su escenario.
+   ===================================================================== */
+
+:root {
+  /* Paleta */
+  --rosa: #ffd6e7;
+  --rosa-50: #fff4f8;
+  --rosa-100: #ffe7f0;
+  --rosa-200: #ffdbe9;
+  --rosa-300: #fbc2d7;
+  --rosa-400: #f7a9c6;
+  --rosa-500: #f28aae;
+  --empolvado: #e3a1b4;
+  --empolvado-oscuro: #c27891;
+  --crema: #fff8f1;
+  --crema-2: #fdefe4;
+  --lavanda: #efe7fb;
+  --lavanda-2: #d9ccf2;
+  --lavanda-3: #b8a5e3;
+  --cereza: #d93b5c;
+  --cereza-suave: #e25c7a;
+  --cereza-oscuro: #a8243f;
+  --oro: #f3cf7a;
+  --tinta: #5b3442;
+  --tinta-suave: #86566a;
+  --linea: #5b3b44;
+
+  /* Tipografías */
+  --f-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --f-script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  --f-mano: 'Caveat', 'Bradley Hand', cursive;
+  --f-texto: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Movimiento */
+  --ease-suave: cubic-bezier(0.22, 0.8, 0.26, 1);
+  --ease-salida: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-entrada-salida: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Sombras delicadas (tintadas de rosa, nunca grises) */
+  --sombra-1: 0 2px 6px -2px rgb(150 60 95 / 0.18);
+  --sombra-2: 0 10px 28px -12px rgb(150 60 95 / 0.38), 0 2px 6px -2px rgb(150 60 95 / 0.14);
+  --sombra-3: 0 24px 60px -24px rgb(130 40 80 / 0.45), 0 6px 16px -8px rgb(130 40 80 / 0.2);
+
+  /* Patrones reutilizables */
+  --patron-corazones: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M16 22c-5-3.6-8-6.8-8-10a4.4 4.4 0 0 1 8-2.6A4.4 4.4 0 0 1 24 12c0 3.2-3 6.4-8 10Z' fill='%23ffffff' fill-opacity='.55'/%3E%3Cpath d='M48 54c-4-2.9-6.4-5.4-6.4-8a3.5 3.5 0 0 1 6.4-2.1 3.5 3.5 0 0 1 6.4 2.1c0 2.6-2.4 5.1-6.4 8Z' fill='%23f7a9c6' fill-opacity='.35'/%3E%3C/svg%3E");
+  --ruido: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .2 0 0 0 0 .3 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
+
+  color-scheme: light;
+  font-family: var(--f-texto);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--tinta);
+  background: var(--rosa);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 1440px) {
+  :root { font-size: 16px; }
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100svh;
+  overflow-x: hidden;
+  background: var(--rosa);
+}
+/* Textura de papel muy sutil sobre todo el sitio */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background-image: var(--ruido);
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+}
+h1, h2, h3, p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+button, a { touch-action: manipulation; }
+::selection { background: var(--rosa-400); color: #fff; }
+
+/* ---------- Accesibilidad ---------- */
+:focus-visible {
+  outline: 2.5px dashed var(--cereza);
+  outline-offset: 5px;
+  border-radius: 14px;
+}
+main:focus, main:focus-visible { outline: none; }
+
+.solo-lector {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.saltar-contenido {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  z-index: 100;
+  translate: -50% -160%;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  background: var(--crema);
+  box-shadow: var(--sombra-2);
+  font-weight: 700;
+  transition: translate 0.3s var(--ease-suave);
+}
+.saltar-contenido:focus { translate: -50% 0; }
+
+/* ---------- Tipografía compartida ---------- */
+.titulo-display {
+  font-family: var(--f-display);
+  font-variation-settings: 'SOFT' 100, 'opsz' 96;
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--tinta);
+  text-wrap: balance;
+}
+.titulo-display em {
+  font-style: italic;
+  font-variation-settings: 'SOFT' 100, 'opsz' 144;
+}
+.antetitulo {
+  font-family: var(--f-script);
+  font-size: clamp(1.6rem, min(2.6vw, 5vh), 2.4rem);
+  line-height: 1;
+  color: var(--cereza-suave);
+}
+.texto-mano {
+  font-family: var(--f-mano);
+  font-weight: 500;
+}
+.texto-intro {
+  max-width: 38ch;
+  font-size: clamp(1rem, min(1.25vw, 2.6vh), 1.18rem);
+  color: var(--tinta-suave);
+  text-wrap: pretty;
+}
+
+/* ---------- Estructura ---------- */
+.pagina { min-height: 100svh; }
+main { position: relative; min-height: 100svh; }
+
+/* Escenario: fondo fijo en capas detrás del contenido */
+.escenario {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.escenario > * { position: absolute; }
+.contenido-escena { position: relative; z-index: 2; }
+
+/* ---------- Partículas ---------- */
+.particulas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.particula {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--t);
+  opacity: var(--op);
+  will-change: transform;
+}
+.particula svg { width: 100%; height: auto; }
+
+.particulas--sube .particula {
+  top: 104%;
+  opacity: 0;
+  animation: particula-sube var(--dur) linear var(--delay) infinite;
+}
+@keyframes particula-sube {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+  12% { opacity: var(--op); }
+  50% { transform: translate3d(var(--deriva), -58vh, 0) rotate(calc(var(--giro) * 0.5)); }
+  88% { opacity: var(--op); }
+  100% { transform: translate3d(0, -118vh, 0) rotate(var(--giro)); opacity: 0; }
+}
+
+.particulas--titila .particula {
+  animation: particula-titila var(--dur) ease-in-out var(--delay) infinite;
+}
+@keyframes particula-titila {
+  0%, 100% { transform: scale(0.55) rotate(0deg); opacity: calc(var(--op) * 0.25); }
+  50% { transform: scale(1) rotate(25deg); opacity: var(--op); }
+}
+
+.particulas--flota .particula {
+  animation: particula-flota var(--dur) ease-in-out var(--delay) infinite alternate;
+}
+@keyframes particula-flota {
+  from { transform: translate3d(0, -8px, 0) rotate(-8deg); }
+  to { transform: translate3d(0, 8px, 0) rotate(8deg); }
+}
+
+@keyframes girar-lento { to { rotate: 360deg; } }
+
+/* Utilidades de vaivén para adornos sueltos */
+.mecerse { animation: mecerse 6s ease-in-out infinite alternate; transform-origin: 50% 0; }
+@keyframes mecerse { from { rotate: -3deg; } to { rotate: 3deg; } }
+.flotar { animation: flotar 5.5s ease-in-out infinite alternate; }
+@keyframes flotar { from { translate: 0 -6px; } to { translate: 0 6px; } }
+.flotar--lento { animation-duration: 8s; }
+.derivar { animation: derivar 60s linear infinite; }
+@keyframes derivar { from { translate: -12vw 0; } to { translate: 112vw 0; } }
+
+/* ---------- Estallido ---------- */
+.estallido {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+.estallido__pieza {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: -10px 0 0 -10px;
+  will-change: transform, opacity;
+}
+.estallido__pieza svg { width: 100%; height: auto; }
+
+/* ---------- Personajes ---------- */
+.personaje {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+/* Reacción suave al pasar el cursor por un personaje interactivo */
+.personaje-reactivo {
+  display: block;
+  transition: transform 0.6s var(--ease-salida);
+  transform-origin: 50% 90%;
+}
+@media (hover: hover) and (pointer: fine) {
+  .personaje-reactivo:hover { transform: translateY(-6px) rotate(-3deg) scale(1.03); }
+  .personaje-reactivo:nth-child(even):hover { transform: translateY(-6px) rotate(3deg) scale(1.03); }
+}
+.personaje-reactivo:active { transform: translateY(-2px) scale(0.97); transition-duration: 0.15s; }
+
+/* Sticker troquelado: borde blanco + sombra suave */
+.sticker {
+  filter:
+    drop-shadow(2.5px 0 0 #fff) drop-shadow(-2.5px 0 0 #fff)
+    drop-shadow(0 2.5px 0 #fff) drop-shadow(0 -2.5px 0 #fff)
+    drop-shadow(0 6px 8px rgb(150 60 95 / 0.25));
+}
+
+/* ---------- Encaje ---------- */
+.encaje {
+  --c: #fff;
+  --t: 22px;
+  height: calc(var(--t) * 1.1);
+  background:
+    linear-gradient(var(--c), var(--c)) 0 0 / 100% calc(var(--t) * 0.32) no-repeat,
+    radial-gradient(circle at calc(var(--t) / 2) calc(var(--t) * 0.36), transparent calc(var(--t) * 0.13), var(--c) calc(var(--t) * 0.15) calc(var(--t) * 0.48), transparent calc(var(--t) * 0.5)) 0 0 / var(--t) 100% repeat-x;
+  filter: drop-shadow(0 3px 3px rgb(150 60 95 / 0.15));
+}
+.encaje--arriba { rotate: 180deg; }
+
+/* ---------- Botón lazo (CTA principal) ---------- */
+.boton-lazo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.8rem 0.95rem 1.1rem;
+  border-radius: 999px;
+  font-family: var(--f-display);
+  font-variation-settings: 'SOFT' 100;
+  font-size: clamp(1rem, min(1.3vw, 2.8vh), 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: var(--tinta);
+  background: linear-gradient(180deg, #fffdfb, var(--crema));
+  box-shadow:
+    inset 0 0 0 2px #fff,
+    inset 0 0 0 3.5px var(--rosa-400),
+    0 0 0 4px rgb(255 255 255 / 0.55),
+    var(--sombra-2);
+  transition:
+    transform 0.5s var(--ease-salida),
+    box-shadow 0.5s var(--ease-salida),
+    background-color 0.3s;
+  isolation: isolate;
+}
+.boton-lazo::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: inherit;
+  border: 1.5px dashed var(--rosa-400);
+  opacity: 0.8;
+  pointer-events: none;
+}
+/* brillo que cruza el botón */
+.boton-lazo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.85) 48%, transparent 66%);
+  background-size: 250% 100%;
+  background-position: 120% 0;
+  opacity: 0;
+  z-index: -1;
+  transition: background-position 0s, opacity 0.3s;
+}
+.boton-lazo--rosa { background: linear-gradient(180deg, #ffe9f1, var(--rosa-300)); }
+.boton-lazo--cereza {
+  color: #fff;
+  background: linear-gradient(180deg, #ea6b88, var(--cereza));
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.35), 0 0 0 4px rgb(255 255 255 / 0.5), var(--sombra-2);
+}
+.boton-lazo--cereza::before { border-color: rgb(255 255 255 / 0.7); }
+.boton-lazo__mono { flex: none; transition: transform 0.6s var(--ease-salida); }
+.boton-lazo__texto { position: relative; }
+.boton-lazo__destellos { position: absolute; inset: 0; pointer-events: none; }
+.boton-lazo__destello {
+  position: absolute;
+  width: 14px;
+  opacity: 0;
+  scale: 0.2;
+  transition: opacity 0.4s, scale 0.6s var(--ease-salida), translate 0.6s var(--ease-salida);
+  filter: drop-shadow(0 1px 2px rgb(200 90 130 / 0.6));
+}
+.boton-lazo__destello--1 { top: -10px; right: 18%; }
+.boton-lazo__destello--2 { bottom: -8px; right: 6%; width: 11px; }
+.boton-lazo__destello--3 { top: 30%; right: -12px; width: 10px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .boton-lazo:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+      inset 0 0 0 2px #fff,
+      inset 0 0 0 3.5px var(--rosa-500),
+      0 0 0 5px rgb(255 255 255 / 0.7),
+      var(--sombra-3);
+  }
+  .boton-lazo--cereza:hover { box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.4), 0 0 0 5px rgb(255 255 255 / 0.7), var(--sombra-3); }
+  .boton-lazo:hover::after {
+    opacity: 1;
+    background-position: -40% 0;
+    transition: background-position 1.1s var(--ease-suave), opacity 0.3s;
+  }
+  .boton-lazo:hover .boton-lazo__mono { transform: rotate(-12deg) scale(1.08); }
+  .boton-lazo:hover .boton-lazo__destello { opacity: 1; scale: 1; }
+  .boton-lazo:hover .boton-lazo__destello--1 { translate: 4px -4px; transition-delay: 0.05s; }
+  .boton-lazo:hover .boton-lazo__destello--2 { translate: 4px 3px; transition-delay: 0.12s; }
+  .boton-lazo:hover .boton-lazo__destello--3 { translate: 5px 0; transition-delay: 0.18s; }
+}
+.boton-lazo:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.12s;
+}
+.boton-lazo:active .boton-lazo__destello { opacity: 1; scale: 1; }
+
+/* Botón pequeño secundario (texto con subrayado de puntitos) */
+.boton-suave {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+  background: rgb(255 255 255 / 0.6);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.9), var(--sombra-1);
+  backdrop-filter: blur(4px);
+  transition: transform 0.4s var(--ease-salida), background-color 0.3s, color 0.3s, box-shadow 0.4s;
+}
+@media (hover: hover) and (pointer: fine) {
+  .boton-suave:hover { transform: translateY(-2px); background: #fff; color: var(--cereza); box-shadow: inset 0 0 0 1.5px var(--rosa-300), var(--sombra-2); }
+}
+.boton-suave:active { transform: scale(0.96); }
+
+/* ---------- Botón volver ---------- */
+.boton-volver {
+  position: fixed;
+  top: clamp(12px, 2.2vh, 24px);
+  left: clamp(12px, 2vw, 28px);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem 0.55rem 0.55rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--tinta);
+  background: rgb(255 248 241 / 0.88);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 0 1.5px #fff, inset 0 0 0 3px var(--rosa-300), var(--sombra-2);
+  transition: transform 0.5s var(--ease-salida), box-shadow 0.5s var(--ease-salida);
+}
+.boton-volver__flecha {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--cereza-suave);
+  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.1);
+  transition: transform 0.5s var(--ease-salida);
+}
+.boton-volver__corazon {
+  opacity: 0;
+  width: 12px;
+  margin-left: -0.4rem;
+  translate: -6px 0;
+  transition: opacity 0.3s, translate 0.5s var(--ease-salida), margin 0.5s var(--ease-salida);
+}
+.boton-volver__mono {
+  position: absolute;
+  top: -14px;
+  right: -8px;
+  rotate: 18deg;
+  transition: rotate 0.6s var(--ease-salida);
+}
+@media (hover: hover) and (pointer: fine) {
+  .boton-volver:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px #fff, inset 0 0 0 3px var(--rosa-400), var(--sombra-3); }
+  .boton-volver:hover .boton-volver__flecha { transform: translateX(-3px); }
+  .boton-volver:hover .boton-volver__corazon { opacity: 1; translate: 0 0; margin-left: 0; }
+  .boton-volver:hover .boton-volver__mono { rotate: 4deg; }
+}
+.boton-volver:active { transform: scale(0.96); }
+
+/* ---------- Menú flotante ---------- */
+.menu-flotante {
+  position: fixed;
+  top: clamp(12px, 2.2vh, 24px);
+  right: clamp(12px, 2vw, 28px);
+  z-index: 50;
+}
+.menu-flotante__boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 1rem 0.4rem 0.55rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  background: rgb(255 248 241 / 0.88);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 0 1.5px #fff, inset 0 0 0 3px var(--rosa-300), var(--sombra-2);
+  transition: transform 0.5s var(--ease-salida), box-shadow 0.5s;
+}
+.menu-flotante__mono { transition: transform 0.7s var(--ease-salida); }
+.menu-flotante__boton.esta-abierto .menu-flotante__mono { transform: rotate(-180deg) scale(0.9); }
+@media (hover: hover) and (pointer: fine) {
+  .menu-flotante__boton:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px #fff, inset 0 0 0 3px var(--rosa-400), var(--sombra-3); }
+  .menu-flotante__boton:hover .menu-flotante__mono { transform: rotate(-14deg); }
+}
+.menu-flotante__boton:active { transform: scale(0.95); }
+
+.menu-flotante__panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(300px, calc(100vw - 24px));
+  max-height: calc(100svh - 90px);
+  overflow-y: auto;
+  padding: 1.1rem 0.8rem 0.9rem;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 100% 0, var(--rosa-100), transparent 55%),
+    var(--crema);
+  box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px var(--rosa-200), var(--sombra-3);
+  transform-origin: 90% 0;
+}
+.menu-flotante__panel::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1.5px dashed var(--rosa-300);
+  border-radius: 19px;
+  pointer-events: none;
+}
+.menu-flotante__titulo {
+  padding: 0 0.7rem 0.5rem;
+  font-family: var(--f-script);
+  font-size: 1.75rem;
+  line-height: 1.1;
+  color: var(--cereza-suave);
+}
+.menu-flotante__enlace {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 0.97rem;
+  transition: background-color 0.3s, transform 0.45s var(--ease-salida), color 0.3s;
+}
+.menu-flotante__icono {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--rosa-100);
+  box-shadow: inset 0 0 0 1.5px #fff;
+  transition: transform 0.6s var(--ease-salida), background-color 0.3s;
+}
+.menu-flotante__icono svg { filter: drop-shadow(0 1px 1px rgb(150 60 95 / 0.3)); }
+.menu-flotante__activo { margin-left: auto; opacity: 0; scale: 0.4; transition: opacity 0.3s, scale 0.5s var(--ease-salida); }
+.menu-flotante__enlace.active { background: rgb(255 214 231 / 0.6); color: var(--cereza-oscuro); }
+.menu-flotante__enlace.active .menu-flotante__activo { opacity: 1; scale: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .menu-flotante__enlace:hover { background: rgb(255 214 231 / 0.5); transform: translateX(3px); }
+  .menu-flotante__enlace:hover .menu-flotante__icono { transform: rotate(-10deg) scale(1.08); background: #fff; }
+}
+.menu-flotante__enlace:active { transform: scale(0.98); }
+.menu-flotante__portada {
+  display: block;
+  margin: 0.5rem 0.7rem 0;
+  padding-top: 0.6rem;
+  border-top: 1.5px dashed var(--rosa-300);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--tinta-suave);
+  transition: color 0.3s;
+}
+.menu-flotante__portada:hover { color: var(--cereza); }
+
+/* ---------- Burbuja de diálogo ---------- */
+.burbuja {
+  position: absolute;
+  z-index: 20;
+  width: max-content;
+  max-width: 220px;
+  padding: 0.55rem 0.95rem;
+  border-radius: 18px;
+  font-family: var(--f-mano);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--tinta);
+  background: #fff;
+  box-shadow: inset 0 0 0 2px var(--rosa-300), var(--sombra-2);
+  pointer-events: none;
+}
+.burbuja::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  box-shadow: 2px 2px 0 0 var(--rosa-300);
+  rotate: 45deg;
+}
+.burbuja--abajo::after { left: calc(50% - 7px); bottom: -7px; }
+.burbuja--izquierda::after { left: -7px; top: calc(50% - 7px); rotate: 135deg; }
+.burbuja--derecha::after { right: -7px; top: calc(50% - 7px); rotate: -45deg; }
+
+/* ---------- Máquina de escribir ---------- */
+.maquina__pendiente { visibility: hidden; }
+/* Cursor de ancho cero: no empuja el texto ni cambia los saltos de línea */
+.maquina__cursor {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 1em;
+  vertical-align: -0.12em;
+}
+.maquina__cursor::after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: -0.05em;
+  width: 2px;
+  height: 1.12em;
+  border-radius: 2px;
+  background: var(--rosa-500);
+  box-shadow: 0 0 6px rgb(242 138 174 / 0.7);
+  animation: cursor-parpadeo 1s steps(1, end) infinite;
+  transition: opacity 0.6s var(--ease-suave);
+}
+.maquina.esta-completa .maquina__cursor::after {
+  opacity: 0;
+  animation: none;
+}
+@keyframes cursor-parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
+}
+
+/* ---------- Inclinable (3D) ---------- */
+.inclinable {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ---------- Cargando ---------- */
+.cargando {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 0.8rem;
+  min-height: 100svh;
+  font-family: var(--f-mano);
+  font-size: 1.5rem;
+  color: var(--tinta-suave);
+}
+.cargando__corazon { animation: latido 1.4s var(--ease-entrada-salida) infinite; }
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.12); }
+  45% { transform: scale(0.98); }
+  60% { transform: scale(1.06); }
+}
+
+/* ---------- Botón de música ---------- */
+.boton-musica {
+  position: fixed;
+  right: clamp(12px, 2vw, 28px);
+  bottom: clamp(12px, 2.4vh, 26px);
+  z-index: 45;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: var(--cereza);
+  background: rgb(255 248 241 / 0.9);
+  box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 3.5px var(--rosa-300), var(--sombra-2);
+  transition: transform 0.5s var(--ease-salida);
+}
+.boton-musica:hover { transform: translateY(-2px) rotate(-6deg); }
+.boton-musica__ondas { position: absolute; inset: -6px; border-radius: 50%; }
+.boton-musica__ondas i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--rosa-400);
+  opacity: 0;
+}
+.boton-musica.esta-sonando .boton-musica__ondas i { animation: onda 2.4s var(--ease-salida) infinite; }
+.boton-musica.esta-sonando .boton-musica__ondas i:nth-child(2) { animation-delay: 0.8s; }
+.boton-musica.esta-sonando .boton-musica__ondas i:nth-child(3) { animation-delay: 1.6s; }
+@keyframes onda { from { opacity: 0.8; scale: 0.9; } to { opacity: 0; scale: 1.5; } }
+
+/* ---------- Rastro de corazones ---------- */
+.rastro-corazon {
+  position: fixed;
+  z-index: 70;
+  pointer-events: none;
+  margin: -9px 0 0 -9px;
+  animation: rastro 1.1s var(--ease-salida) forwards;
+}
+@keyframes rastro {
+  0% { transform: translate(0, 0) scale(0.3); opacity: 0; }
+  20% { opacity: 1; transform: translate(0, -6px) scale(1.05); }
+  100% { transform: translate(var(--deriva), -54px) scale(0.75) rotate(14deg); opacity: 0; }
+}
+
+/* ---------- Cabecera de página compartida ---------- */
+.cabecera {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+.cabecera .titulo-display { font-size: clamp(2rem, min(4.2vw, 8vh), 3.9rem); }
+.cabecera .texto-intro { margin-top: 0.4rem; }
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .particulas--sube .particula { top: var(--y); opacity: var(--op); }
+  .particula, .mecerse, .flotar, .derivar { animation: none !important; }
+}

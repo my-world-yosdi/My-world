@@ -1,0 +1,279 @@
+/* =====================================================================
+   ♡ Abre un regalito · teatrito de estrellas
+   ===================================================================== */
+
+.regalito { overflow-x: clip; --caja: min(70vw, 38vh, 320px); --piso: clamp(70px, 15vh, 150px); --cenefa: clamp(48px, 10vh, 100px); }
+
+/* ---------- Escenario ---------- */
+.escena-teatro__cielo {
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 45% at 50% 36%, rgb(255 240 250 / 0.95), rgb(255 240 250 / 0) 70%),
+    linear-gradient(180deg, #dacbf2 0%, #e9d5f1 38%, #f7d3e6 72%, #ffd6e7 100%);
+}
+.escena-teatro__luna { top: 17%; right: 19%; width: clamp(76px, 8.5vw, 150px); filter: drop-shadow(0 0 22px rgb(255 243 199 / 0.9)); }
+.escena-teatro__luna svg { overflow: visible; }
+.escena-teatro__gemelos { position: absolute; right: -44%; bottom: -14%; width: 74%; }
+
+.escena-teatro__foco {
+  left: 50%;
+  top: 0;
+  bottom: var(--piso);
+  width: min(76vw, 980px);
+  translate: -50% 0;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.65), rgb(255 255 255 / 0.12) 85%, rgb(255 255 255 / 0));
+  clip-path: polygon(44% 0, 56% 0, 80% 100%, 20% 100%);
+  animation: foco-respira 6s ease-in-out infinite alternate;
+}
+@keyframes foco-respira { from { opacity: 0.65; } to { opacity: 1; } }
+
+.escena-teatro__piso { left: 0; right: 0; bottom: 0; height: var(--piso); }
+.escena-teatro__tablas {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 36% 60% at 50% 0%, rgb(255 255 255 / 0.55), transparent 70%),
+    linear-gradient(180deg, rgb(150 60 95 / 0.15), transparent 14px),
+    repeating-linear-gradient(90deg, #eaa7bf 0 2px, #f5c0d3 2px 120px);
+}
+.escena-teatro__falda { position: absolute; left: 0; right: 0; top: 0; --t: 28px; --c: #fffaf4; }
+
+.escena-teatro__telon {
+  top: 0;
+  bottom: 0;
+  width: clamp(80px, 14vw, 270px);
+  background:
+    repeating-linear-gradient(90deg, rgb(120 20 60 / 0.16) 0 3px, transparent 3px 16px, rgb(255 255 255 / 0.14) 16px 22px, transparent 22px 38px),
+    linear-gradient(180deg, #e7809f, #d76489);
+  box-shadow: 0 0 30px rgb(120 20 60 / 0.25);
+  z-index: 2;
+}
+.escena-teatro__telon--izq { left: 0; clip-path: polygon(0 0, 100% 0, 96% 28%, 40% 60%, 64% 78%, 100% 100%, 0 100%); }
+.escena-teatro__telon--der { right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 36% 78%, 60% 60%, 4% 28%); }
+.escena-teatro__amarre { top: 57%; z-index: 3; filter: drop-shadow(0 4px 6px rgb(120 20 60 / 0.3)); }
+.escena-teatro__amarre--izq { left: clamp(14px, 4vw, 80px); rotate: -12deg; }
+.escena-teatro__amarre--der { right: clamp(14px, 4vw, 80px); rotate: 12deg; }
+
+.escena-teatro__cenefa { top: 0; left: 0; right: 0; height: var(--cenefa); z-index: 4; filter: drop-shadow(0 8px 10px rgb(120 20 60 / 0.25)); }
+.escena-teatro__cenefa-tela {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgb(120 20 60 / 0.12) 0 3px, transparent 3px 20px),
+    linear-gradient(180deg, #d76489, #e98aa7);
+  -webkit-mask:
+    radial-gradient(circle 46px at 46px calc(100% - 46px), #000 97%, transparent 100%) 0 100% / 92px 92px repeat-x,
+    linear-gradient(#000, #000) 0 0 / 100% calc(100% - 45px) no-repeat;
+  mask:
+    radial-gradient(circle 46px at 46px calc(100% - 46px), #000 97%, transparent 100%) 0 100% / 92px 92px repeat-x,
+    linear-gradient(#000, #000) 0 0 / 100% calc(100% - 45px) no-repeat;
+}
+.escena-teatro__flecos {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - 52px);
+  height: 12px;
+  background: radial-gradient(circle, #fff3c7 4px, rgb(255 243 199 / 0) 4.6px) 0 0 / 23px 12px repeat-x;
+}
+
+/* ---------- Composición ---------- */
+.regalito__composicion {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  min-height: 100svh;
+  padding: calc(var(--cenefa) + 12px) 20px clamp(10px, 2.6vh, 28px);
+}
+.regalito__cabecera .antetitulo { font-size: clamp(1.4rem, min(2.2vw, 4.4vh), 2.2rem); }
+.regalito__titulo { font-size: clamp(1.9rem, min(3.6vw, 7vh), 3.5rem); }
+
+.regalito__escenario {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: end;
+  width: 100%;
+  padding-bottom: calc(var(--piso) - 64px);
+}
+.regalito__zona { position: relative; display: grid; justify-items: center; }
+.regalito__sombra {
+  width: calc(var(--caja) * 1.1);
+  height: 22px;
+  margin-top: -12px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(150 60 95 / 0.3), transparent);
+}
+
+/* ---------- Regalo ---------- */
+.regalo-boton { position: relative; z-index: 2; display: block; border-radius: 18px; outline-offset: 12px; }
+.regalo-boton--abierto, .regalo-boton--sacudiendo { cursor: default; }
+.regalo {
+  position: relative;
+  width: var(--caja);
+  aspect-ratio: 1 / 1.05;
+  transition: translate 0.6s var(--ease-salida), scale 0.6s var(--ease-salida);
+}
+.regalo-boton--cerrado .regalo { animation: regalo-espera 6.5s ease-in-out 1.6s infinite; }
+@keyframes regalo-espera {
+  0%, 84%, 100% { rotate: 0deg; }
+  87% { rotate: -2deg; }
+  90% { rotate: 1.6deg; }
+  93% { rotate: -0.8deg; }
+}
+.regalo-boton--sacudiendo .regalo { animation: regalo-sacudida 0.48s var(--ease-entrada-salida); }
+@keyframes regalo-sacudida {
+  0% { scale: 1 1; rotate: 0deg; }
+  25% { scale: 1.03 0.97; rotate: -3deg; }
+  55% { scale: 0.98 1.03; rotate: 3deg; }
+  100% { scale: 1 1; rotate: 0deg; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .regalo-boton--cerrado:hover .regalo { translate: 0 -6px; }
+  .regalo-boton--cerrado:hover .regalo__tapa-anticipo { transform: translateY(-14%) rotate(-3deg); }
+  .regalo-boton--cerrado:hover .regalo__brillo { opacity: 0.7; }
+}
+.regalo-boton--cerrado:focus-visible .regalo__tapa-anticipo { transform: translateY(-14%) rotate(-3deg); }
+.regalo-boton--cerrado:active .regalo { scale: 0.97; transition-duration: 0.12s; }
+
+.regalo__melody { position: absolute; left: 20%; width: 60%; bottom: 26%; z-index: 1; }
+.regalo__burbuja { bottom: 88%; left: 62%; }
+
+.regalo__caja {
+  position: absolute;
+  z-index: 2;
+  left: 7%;
+  right: 7%;
+  bottom: 0;
+  height: 62%;
+  border: 3px solid var(--linea);
+  border-radius: 6px 6px 14px 14px;
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.8) 3.5px, transparent 4px) 0 0 / 24px 24px,
+    linear-gradient(180deg, #fbc6da, #f4a9c4);
+  box-shadow: inset 0 -12px 0 rgb(200 90 130 / 0.14), var(--sombra-2);
+}
+.regalo__brillo {
+  position: absolute;
+  left: 7%;
+  top: 9%;
+  width: 7%;
+  height: 58%;
+  border-radius: 999px;
+  background: #fff;
+  opacity: 0.45;
+  transition: opacity 0.4s;
+}
+.regalo__cinta-v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 17%;
+  translate: -50% 0;
+  transform-origin: 50% 0;
+  background: linear-gradient(90deg, #d24c6e, #ec7896 40%, #d95777);
+  box-shadow: -2px 0 0 var(--linea), 2px 0 0 var(--linea);
+}
+.regalo__etiqueta {
+  position: absolute;
+  right: -12%;
+  top: 20%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2em 0.7em 0.25em;
+  border-radius: 6px;
+  font-family: var(--f-mano);
+  font-size: clamp(1rem, 2.4vh, 1.3rem);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--tinta);
+  background: var(--crema);
+  box-shadow: inset 0 0 0 1.5px var(--rosa-300), var(--sombra-1);
+  rotate: 10deg;
+}
+
+.regalo__tapa { position: absolute; z-index: 4; left: 0; right: 0; bottom: 57%; height: 19%; }
+.regalo__tapa-anticipo { position: absolute; inset: 0; transform-origin: 20% 100%; transition: transform 0.6s var(--ease-salida); }
+.regalo__tapa-cuerpo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 3px solid var(--linea);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.7) 3px, transparent 3.5px) 6px 6px / 24px 24px,
+    linear-gradient(180deg, #f9b5cd, #f19bbb);
+  box-shadow: 0 8px 10px -6px rgb(150 60 95 / 0.35);
+}
+.regalo__tapa-cinta {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 14.6%;
+  translate: -50% 0;
+  transform-origin: 50% 100%;
+  background: linear-gradient(90deg, #d24c6e, #ec7896 40%, #d95777);
+  box-shadow: -2px 0 0 var(--linea), 2px 0 0 var(--linea);
+}
+.regalo__mono { position: absolute; left: 50%; bottom: 62%; width: 56%; aspect-ratio: 1.2; translate: -50% 0; filter: drop-shadow(0 4px 4px rgb(120 30 60 / 0.25)); }
+.regalo__mono-parte { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform-origin: 50% 45%; }
+.regalo__estallido { top: 38%; }
+
+/* ---------- Tarjeta con el mensaje ---------- */
+.regalito__tarjeta {
+  position: absolute;
+  z-index: 5;
+  left: calc(50% + var(--caja) * 0.62);
+  bottom: calc(var(--piso) - 30px);
+  width: min(340px, 27vw);
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  padding: 1.7rem 1.4rem 1.3rem;
+  border-radius: 18px;
+  text-align: center;
+  background: var(--crema);
+  box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px var(--rosa-200), var(--sombra-3);
+}
+.regalito__tarjeta::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1.5px dashed var(--rosa-300);
+  border-radius: 12px;
+  pointer-events: none;
+}
+.regalito__tarjeta-cinta {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  width: 96px;
+  height: 26px;
+  translate: -50% 0;
+  rotate: -5deg;
+  background: repeating-linear-gradient(45deg, rgb(201 182 240 / 0.85) 0 7px, rgb(255 255 255 / 0.85) 7px 14px);
+}
+.regalito__mensaje { font-size: clamp(1.35rem, min(1.9vw, 3.8vh), 1.75rem); line-height: 1.22; color: var(--tinta); }
+.regalito__firma { font-family: var(--f-script); font-size: 1.8rem; line-height: 1; color: var(--cereza-suave); }
+.regalito__envolver { font-size: 0.95rem; padding-block: 0.7rem; }
+
+.regalito__pista {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  z-index: 3;
+  font-size: clamp(1.15rem, min(1.5vw, 3.2vh), 1.4rem);
+  color: var(--tinta);
+}
+
+/* ---------- Tablet y móvil ---------- */
+@media (max-width: 900px) {
+  .regalito { overflow-x: clip; --caja: min(62vw, 36svh, 300px); }
+  .escena-teatro__luna { right: 4%; top: 24%; width: 64px; }
+  .regalito__escenario { padding-bottom: 20px; padding-top: 18vh; }
+  .regalito__tarjeta { position: relative; left: auto; bottom: auto; width: min(360px, 88vw); margin-top: 28px; }
+}
