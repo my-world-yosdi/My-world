@@ -2,7 +2,7 @@
  * Recuerda (solo en su navegador) qué páginas ya visitó,
  * para marcar los lugares del mapa y mostrar la sorpresa final.
  */
-export type LugarId = 'cositas' | 'recuerditos' | 'cartita' | 'regalito' | 'extranes'
+export type LugarId = 'cositas' | 'recuerditos' | 'cartita' | 'especial' | 'regalito' | 'extranes'
 
 const CLAVE = 'my-world:visitas'
 

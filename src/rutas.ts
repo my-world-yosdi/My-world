@@ -7,6 +7,7 @@ export const rutas = {
   cositas: '/cositas-de-ti',
   recuerditos: '/recuerditos',
   cartita: '/cartita',
+  especial: '/carta-especial',
   regalito: '/regalito',
   extranes: '/cuando-me-extranes',
 } as const
@@ -16,6 +17,7 @@ const cargadores = {
   [rutas.cositas]: () => import('./pages/cositas/CositasDeTi'),
   [rutas.recuerditos]: () => import('./pages/recuerditos/Recuerditos'),
   [rutas.cartita]: () => import('./pages/cartita/Cartita'),
+  [rutas.especial]: () => import('./pages/especial/CartaEspecial'),
   [rutas.regalito]: () => import('./pages/regalito/Regalito'),
   [rutas.extranes]: () => import('./pages/extranes/CuandoMeExtranes'),
 }
@@ -24,6 +26,7 @@ export const Mundo = lazy(cargadores[rutas.mundo])
 export const CositasDeTi = lazy(cargadores[rutas.cositas])
 export const Recuerditos = lazy(cargadores[rutas.recuerditos])
 export const Cartita = lazy(cargadores[rutas.cartita])
+export const CartaEspecial = lazy(cargadores[rutas.especial])
 export const Regalito = lazy(cargadores[rutas.regalito])
 export const CuandoMeExtranes = lazy(cargadores[rutas.extranes])
 

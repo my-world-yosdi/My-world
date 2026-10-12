@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router'
 import { AnimatePresence, MotionConfig } from 'motion/react'
 import { general } from './data/mensajes'
-import { rutas, Mundo, CositasDeTi, Recuerditos, Cartita, Regalito, CuandoMeExtranes } from './rutas'
+import { rutas, Mundo, CositasDeTi, Recuerditos, Cartita, CartaEspecial, Regalito, CuandoMeExtranes } from './rutas'
 import Inicio from './pages/inicio/Inicio'
 import NoEncontrado from './pages/NoEncontrado'
 import { Pagina } from './components/ui/Pagina'
@@ -35,6 +35,7 @@ export default function App() {
           <Route path={rutas.cositas} element={<Pagina><CositasDeTi /></Pagina>} />
           <Route path={rutas.recuerditos} element={<Pagina><Recuerditos /></Pagina>} />
           <Route path={rutas.cartita} element={<Pagina><Cartita /></Pagina>} />
+          <Route path={rutas.especial} element={<Pagina><CartaEspecial /></Pagina>} />
           <Route path={rutas.regalito} element={<Pagina><Regalito /></Pagina>} />
           <Route path={rutas.extranes} element={<Pagina><CuandoMeExtranes /></Pagina>} />
           <Route path="*" element={<Pagina><NoEncontrado /></Pagina>} />

@@ -10,6 +10,7 @@ Nombres sugeridos:
 | My Melody         | `my-melody.png`         |
 | My Sweet Piano    | `my-sweet-piano.png`    |
 | Flat              | `flat.png`              |
+| Hello Kitty (portada) | `hello-kitty-hero.png` |
 | Hello Kitty       | `hello-kitty.png`       |
 | Cinnamoroll       | `cinnamoroll.png`       |
 | Little Twin Stars | `little-twin-stars.png` |

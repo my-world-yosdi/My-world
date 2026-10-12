@@ -190,3 +190,36 @@ export function Globo({ className }: { className?: string }) {
     </svg>
   )
 }
+
+/* ♡ Sobre de encaje con cinta · Una cartita especial */
+export function SobreEspecial({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 160 160" className={className} aria-hidden="true" focusable="false">
+      <g className="lugar-especial__chispas" fill="#FFE08A">
+        <path d="M34 40 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" />
+        <path d="M126 34 l2.5 6 6 2.5 -6 2.5 -2.5 6 -2.5 -6 -6 -2.5 6 -2.5z" />
+      </g>
+      <g className="lugar-especial__sobre">
+        <rect x="22" y="56" width="116" height="80" rx="7" fill="#FFF5EE" {...t} />
+        <path d="M22 136 L80 94 L138 136" fill="none" stroke="#F2B9CB" strokeWidth="2" strokeDasharray="2 5" strokeLinecap="round" />
+        <path d="M24 58 L80 102 L136 58" fill="#FFF8F3" {...t} />
+        <g fill="#fff" stroke={LINEA} strokeWidth="1.2">
+          {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+            <circle key={`a${i}`} cx={30 + i * 7.6} cy={64 + i * 5.9} r="3.2" />
+          ))}
+          {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+            <circle key={`b${i}`} cx={130 - i * 7.6} cy={64 + i * 5.9} r="3.2" />
+          ))}
+        </g>
+        <rect x="22" y="90" width="116" height="10" fill="#F7A9C6" stroke={LINEA} strokeWidth="2" />
+        <rect x="75" y="56" width="10" height="80" fill="#F7A9C6" stroke={LINEA} strokeWidth="2" />
+        <MonoMini x={80} y={94} escala={1.25} color="#F28AAE" />
+      </g>
+      <CorazonMini x={80} y={124} escala={0.14} color="#E25C7A" className="lugar-especial__corazon" />
+      <g className="lugar-especial__etiqueta">
+        <path d="M118 104 L146 112 L142 126 L114 118 Z" fill="#FFF8F1" {...t} strokeWidth={2.2} />
+        <circle cx="120" cy="110" r="2" fill={LINEA} />
+      </g>
+    </svg>
+  )
+}

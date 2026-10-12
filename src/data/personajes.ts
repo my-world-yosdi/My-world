@@ -35,7 +35,11 @@ export const personajes: Record<PersonajeId, Personaje> = {
   },
   piano: { nombre: 'My Sweet Piano', imagen: undefined }, // '/assets/sanrio/my-sweet-piano.png'
   flat: { nombre: 'Flat', imagen: undefined }, // '/assets/sanrio/flat.png'
-  kitty: { nombre: 'Hello Kitty', imagen: undefined }, // '/assets/sanrio/hello-kitty.png'
+  kitty: {
+    nombre: 'Hello Kitty',
+    imagen: undefined, // '/assets/sanrio/hello-kitty.png'
+    imagenHero: undefined, // '/assets/sanrio/hello-kitty-hero.png'
+  },
   cinnamoroll: { nombre: 'Cinnamoroll', imagen: undefined }, // '/assets/sanrio/cinnamoroll.png'
   twinStars: { nombre: 'Little Twin Stars', imagen: undefined }, // '/assets/sanrio/little-twin-stars.png'
 }

@@ -22,6 +22,12 @@
 .mundo {
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
+}
+/* las descripciones de los extremos no se salen de la pantalla */
+@media (min-width: 821px) {
+  .lugar:first-child .lugar__desc { left: -8px; }
+  .lugar:last-child .lugar__desc { right: -8px; }
 }
 .mundo__cabecera {
   padding: clamp(54px, 9vh, 104px) 24px 0;
@@ -30,15 +36,17 @@
 .mundo__cabecera .antetitulo { font-size: clamp(1.4rem, min(2.2vw, 4.4vh), 2.2rem); }
 .mundo__titulo-cinta {
   position: relative;
-  padding: 0.45em 3.4em 0.85em;
-  max-width: calc(100vw - 32px);
+  /* el tamaño de letra vive aquí para que el padding (en em) acompañe al título */
+  font-size: clamp(1.7rem, min(3.4vw, 6.6vh), 3.3rem);
+  padding: 0.32em 1.9em 0.6em;
+  max-width: calc(100vw - 24px);
   margin: 2px 0 4px;
   filter: drop-shadow(0 10px 16px rgb(200 90 130 / 0.22));
 }
 .mundo__cinta { position: absolute; inset: 0; width: 100%; height: 100%; }
-.mundo__titulo {
+.mundo .mundo__titulo {
   position: relative;
-  font-size: clamp(1.7rem, min(3.4vw, 6.6vh), 3.3rem);
+  font-size: 1em;
   white-space: nowrap;
 }
 .mundo__cabecera .texto-intro { margin-top: 0; max-width: 46ch; font-size: clamp(0.95rem, min(1.2vw, 2.6vh), 1.15rem); }
@@ -226,6 +234,17 @@
 /* Regalo: chispitas escondidas */
 .lugar-regalo__chispas { opacity: 0; transform: scale(0.4); transform-origin: 50% 100%; }
 .lugar-regalo__tapa { transform-origin: 50% 100%; }
+/* Sobre especial: se levanta y el corazón late */
+.lugar-especial__sobre, .lugar-especial__etiqueta { transform-origin: 50% 100%; }
+.lugar-especial__corazon { transform-origin: 50% 50%; }
+.lugar-especial__chispas { opacity: 0; transform: scale(0.4); transform-origin: 50% 100%; }
+@media (hover: hover) and (pointer: fine) {
+  .lugar__enlace:hover .lugar-especial__sobre { transform: translateY(-6px) rotate(-3deg); }
+  .lugar__enlace:hover .lugar-especial__corazon { transform: translateY(-8px) scale(1.4); }
+  .lugar__enlace:hover .lugar-especial__etiqueta { transform: rotate(10deg); }
+  .lugar__enlace:hover .lugar-especial__chispas { opacity: 1; transform: scale(1); }
+}
+.lugar__enlace:focus-visible .lugar-especial__sobre { transform: translateY(-6px) rotate(-3deg); }
 /* Globo */
 .lugar-globo__todo { transform-origin: 50% 100%; }
 
@@ -257,16 +276,19 @@
   .lugar__enlace:hover .lugar-globo__todo { transform: translateY(-10px) rotate(3deg); }
 }
 
-/* ---------- My Melody de bienvenida ---------- */
-.mundo__melody {
+/* ---------- My Melody y Hello Kitty de bienvenida ---------- */
+.mundo__anfitrionas {
+  --tam-anfitriona: clamp(84px, min(9vw, 17vh), 160px);
   position: absolute;
-  left: 1.5%;
+  left: 1%;
   bottom: 3%;
-  width: clamp(84px, min(9vw, 17vh), 160px);
   z-index: 3;
+  display: flex;
+  align-items: flex-end;
 }
-.mundo__melody-boton { display: block; width: 100%; border-radius: 40%; }
-.mundo__melody-burbuja { left: 94%; top: 8%; }
+.mundo__anfitriona { display: block; width: var(--tam-anfitriona); border-radius: 40%; }
+.mundo__anfitriona--kitty { margin-left: calc(var(--tam-anfitriona) * -0.22); }
+.mundo__anfitrionas-burbuja { left: 30%; bottom: 100%; }
 
 /* ---------- Secreto ---------- */
 .mundo__secreto {
@@ -323,6 +345,11 @@
 .mundo__nota--final h2 { font-size: 1.9rem; color: var(--cereza-suave); }
 .mundo__nota-firma { font-size: 1.5rem; color: var(--cereza-oscuro); }
 
+/* ---------- Tablet horizontal / laptop chica: junta un poco los lugares ---------- */
+@media (min-width: 821px) and (max-width: 1180px) {
+  .lugar { left: calc(var(--x) * 0.86 + 7%); }
+}
+
 /* ---------- Laptop baja (1366×600) ---------- */
 @media (min-width: 821px) and (max-height: 700px) {
   .mundo__cabecera { padding-top: 46px; }
@@ -332,8 +359,8 @@
 /* ---------- Tablet y móvil ---------- */
 @media (max-width: 820px) {
   .mundo__cabecera { padding-top: 76px; }
-  .mundo__titulo { font-size: clamp(1.3rem, 6vw, 2rem); white-space: normal; }
-  .mundo__titulo-cinta { padding-inline: 2.4em; }
+  /* el título siempre en una sola línea para que no lo cruce la costura de la cinta */
+  .mundo__titulo-cinta { font-size: clamp(1rem, 5.2vw, 1.7rem); padding-inline: 1.7em; }
   .mundo__cabecera .texto-intro { padding-inline: 8px; }
   .mundo__mapa { --tam: min(46vw, 210px); flex: none; padding: 36px 0 110px; }
   .mundo__camino--h { display: none; }
@@ -353,8 +380,8 @@
     font-size: 1.1rem;
     background: rgb(255 255 255 / 0.75);
   }
-  .mundo__melody { left: auto; right: 4%; top: 4px; bottom: auto; width: 84px; }
-  .mundo__melody-burbuja { left: auto; right: 96%; top: 10%; }
-  .mundo__melody-burbuja::after { left: auto; right: -7px; rotate: -45deg; }
+  .mundo__anfitrionas { --tam-anfitriona: 76px; left: auto; right: 3%; top: 4px; bottom: auto; }
+  .mundo__anfitrionas-burbuja { left: auto; right: 4px; bottom: auto; top: 100%; margin-top: 10px; }
+  .mundo__anfitrionas-burbuja::after { left: auto; right: 40px; bottom: auto; top: -7px; rotate: -135deg; }
   .mundo__secreto { right: auto; left: 4%; top: 6px; width: 90px; z-index: 3; }
 }

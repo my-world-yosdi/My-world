@@ -256,6 +256,7 @@
 
 /* ---------- Móvil ---------- */
 @media (max-width: 720px) {
+  .escena-tarde__cinna { top: auto; bottom: 7vh; right: auto; left: 3%; width: 58px; }
   .extranes { --ancho-sobre: min(34vw, 150px); }
   .extranes__composicion { padding-top: 84px; }
 }

@@ -198,6 +198,19 @@ main { position: relative; min-height: 100svh; }
   100% { transform: translate3d(0, -118vh, 0) rotate(var(--giro)); opacity: 0; }
 }
 
+.particulas--cae .particula {
+  top: -6%;
+  opacity: 0;
+  animation: particula-cae var(--dur) linear var(--delay) infinite;
+}
+@keyframes particula-cae {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: var(--op); }
+  50% { transform: translate3d(var(--deriva), 56vh, 0) rotate(calc(var(--giro) * 0.5)); }
+  90% { opacity: var(--op); }
+  100% { transform: translate3d(0, 114vh, 0) rotate(var(--giro)); opacity: 0; }
+}
+
 .particulas--titila .particula {
   animation: particula-titila var(--dur) ease-in-out var(--delay) infinite;
 }
@@ -709,6 +722,6 @@ main { position: relative; min-height: 100svh; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .particulas--sube .particula { top: var(--y); opacity: var(--op); }
+  .particulas--sube .particula, .particulas--cae .particula { top: var(--y); opacity: var(--op); }
   .particula, .mecerse, .flotar, .derivar { animation: none !important; }
 }

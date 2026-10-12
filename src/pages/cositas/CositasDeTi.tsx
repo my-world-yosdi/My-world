@@ -148,7 +148,7 @@ export default function CositasDeTi() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.8, delay: 0.3, ease: suave }}
               >
-                <Personaje id="melody" className="cositas__final-melody" />
+                <Personaje id="kitty" className="cositas__final-pj" />
                 <div>
                   <p className="cositas__final-titulo">{cositas.final.titulo}</p>
                   <p className="texto-mano cositas__final-texto">{cositas.final.texto}</p>

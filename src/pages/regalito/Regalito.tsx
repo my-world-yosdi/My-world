@@ -77,15 +77,15 @@ export default function Regalito() {
               aria-disabled={fase !== 'cerrado'}
             >
               <div className="regalo">
-                {/* My Melody escondida adentro */}
+                {/* Hello Kitty escondida adentro */}
                 <motion.div
-                  className="regalo__melody"
+                  className="regalo__sorpresa"
                   initial={false}
                   animate={abierto ? { y: '-62%', opacity: 1, scale: 1 } : { y: '18%', opacity: 0, scale: 0.85 }}
                   transition={t({ delay: 1.15, duration: 1.1, ease: suave }, { delay: 0.05, duration: 0.7, ease: suave })}
                 >
-                  <Personaje id="melody" />
-                  <Burbuja visible={abierto} texto={regalito.melodyDice} className="regalo__burbuja" />
+                  <Personaje id="kitty" />
+                  <Burbuja visible={abierto} texto={regalito.personajeDice} className="regalo__burbuja" />
                 </motion.div>
 
                 {/* Caja */}

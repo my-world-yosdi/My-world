@@ -60,6 +60,11 @@ export const paginas = {
     corto: 'Un regalito',
     descripcion: 'Hay algo esperándote en la cajita',
   },
+  especial: {
+    titulo: 'Algo que quiero vivir contigo ♡',
+    corto: 'Una cartita especial ♡',
+    descripcion: 'Esta es más personal. Léela con calma',
+  },
   extranes: {
     titulo: 'Para cuando me extrañes',
     corto: 'Cuando me extrañes',
@@ -91,7 +96,7 @@ export const inicio = {
   /** Lo que dice cada personaje cuando lo tocan en la portada. */
   saludos: {
     melody: `¡Hola, ${ella}! Te estábamos esperando.`,
-    kitty: 'Te guardamos el mejor sitio.',
+    kitty: `¡Hola, ${ella}! Melody y yo te preparamos todo esto.`,
     cinnamoroll: 'Vine volando apenas supe que llegabas.',
     twinStars: 'Pide un deseo, total no cuesta nada.',
     piano: 'Meee… digo, ¡hola!',
@@ -107,6 +112,7 @@ export const mundo = {
   antetitulo: `bienvenida, ${ella}, a`,
   subtitulo: 'Hay algunas cositas que quiero enseñarte. Empieza por donde quieras.',
   melodyDice: '¿Por dónde empezamos?',
+  kittyDice: '¡Todo esto es para ti!',
   entrar: 'Entrar',
   visitado: 'ya pasaste por aquí',
   secretoEtiqueta: 'Un corazoncito escondido',
@@ -209,6 +215,33 @@ export const cartita = {
 }
 
 /* ------------------------------------------------------------------ */
+/* Una cartita especial  ·  /carta-especial                            */
+/* ------------------------------------------------------------------ */
+
+export const cartaEspecial = {
+  antetitulo: 'una cartita especial',
+  etiquetaSobre: `Para ${ella}, de ${el}`,
+  abrir: 'Abrir la cartita especial',
+  pistaCerrada: 'Toca el sobre cuando estés lista ♡',
+  pistaReleer: 'Puedes volver a abrirla las veces que quieras',
+  guardar: 'Guardar la carta',
+  volverAlMundo: 'Volver al mundito',
+  titulo: 'Quién lo hubiera imaginado... ♡',
+  parrafos: [
+    'Me acuerdo de cuando te veía por fotos hace años. En ese entonces ni se me pasaba por la cabeza que algún día íbamos a estar juntos.',
+    'A veces me pongo a pensar en eso y todavía se me hace un poco irreal. Antes solo te veía por Instagram y ahora eres alguien tan importante en mi vida. No sé, es bonito pensar en cómo terminaron pasando las cosas.',
+    `${ella}, de verdad eres una chica maravillosa. Me encanta la persona que eres, tu manera de ser y esas pequeñas cosas tuyas que quizá ni te das cuenta de que me encantan. Me hace muy feliz tenerte conmigo y, sinceramente, me gusta mucho más mi vida desde que llegaste.`,
+    'Y hay algo que quiero que sepas. Cuando pienso en mi futuro, me gusta imaginarte ahí. Me encantaría casarme contigo algún día, tener nuestros hijos y formar una familia juntos. Sé que todavía nos quedan muchas cosas por vivir, pero contigo me nace pensar en todo eso.',
+    'Quién me hubiera dicho hace unos años que esa chica que veía en fotos terminaría siendo la persona con la que quiero compartir tantas cosas.',
+    'Y ahora que te tengo en mi vida, solo quiero seguir viviendo momentos bonitos contigo.',
+  ],
+  /** Índice (desde 0) del párrafo que lleva la animación especial de corazones. */
+  parrafoEspecial: 3,
+  despedida: `Te quiero muchísimo, mi ${ella}. ♡`,
+  firma: `— ${el}`,
+}
+
+/* ------------------------------------------------------------------ */
 /* Abre un regalito  ·  /regalito                                      */
 /* ------------------------------------------------------------------ */
 
@@ -218,7 +251,8 @@ export const regalito = {
   pistaAbierto: 'Lo puedes volver a envolver y abrir las veces que quieras',
   etiquetaAbrir: 'Abrir el regalo',
   etiquetaTarjeta: `para ${ella}`,
-  melodyDice: '¡Sorpresa!',
+  /** Lo que dice Hello Kitty al salir de la caja. */
+  personajeDice: '¡Sorpresa!',
   mensaje:
     'No es un regalo enorme, pero lo hice con mucho cariño. Espero haberte sacado una sonrisita ♡',
   firma: `— ${el}`,

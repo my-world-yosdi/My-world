@@ -281,7 +281,7 @@
 .cartita__mesa {
   position: relative;
   z-index: 1;
-  width: min(calc(var(--sobre) * 1.32), calc(100vw - 16px));
+  width: min(calc(var(--sobre) * 1.32), calc(100vw - 40px));
   height: clamp(40px, 9vh, 92px);
   margin-top: calc(var(--sobre) * -0.05);
 }
@@ -428,6 +428,6 @@
   .escena-cuarto__cuadro { right: 3%; top: 54%; width: 18vw; }
   .escena-cuarto__guirnalda { height: 60px; }
   .cartita__composicion { padding-top: 96px; }
-  .cartita__melody { right: -2%; bottom: -6%; width: 22vw; }
+  .cartita__melody { right: 0; bottom: -6%; width: 20vw; }
   .carta-papel__estampilla { right: 50px; width: 54px; }
 }

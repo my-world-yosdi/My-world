@@ -29,8 +29,8 @@ export function EscenaTiendita() {
         <Flor className="escena-tiendita__maceta-flor escena-tiendita__maceta-flor--2" color="#E9DDFB" contorno />
       </div>
 
-      <div className="escena-tiendita__kitty">
-        <Personaje id="kitty" />
+      <div className="escena-tiendita__asomado">
+        <Personaje id="cinnamoroll" />
       </div>
     </div>
   )

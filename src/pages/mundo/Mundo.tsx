@@ -14,12 +14,12 @@ import { Personaje } from '../../components/personajes/Personaje'
 import { CintaBanner, Corazon, Destello, Mono, Nube } from '../../components/decor/Adornos'
 import { Estallido } from '../../components/decor/Estallido'
 import { EscenaMundo } from './EscenaMundo'
-import { Buzon, Frasco, Globo, Polaroids, RegaloMini } from './IlustracionesLugares'
+import { Buzon, Frasco, Globo, Polaroids, RegaloMini, SobreEspecial } from './IlustracionesLugares'
 import './Mundo.css'
 
 const suave = [0.22, 0.8, 0.26, 1] as const
 
-const CAMINO = 'M-10 92 C 40 70, 60 46, 120 44 S 230 74, 310 74 S 430 40, 500 40 S 600 74, 690 74 S 820 44, 880 44 S 980 30, 1010 20'
+const CAMINO = 'M-10 94 C 30 72, 50 50, 90 48 S 190 78, 250 78 S 350 44, 410 44 S 520 76, 580 76 S 690 46, 750 46 S 850 72, 910 72 S 990 58, 1010 50'
 
 type Lugar = {
   id: LugarId
@@ -32,11 +32,12 @@ type Lugar = {
 }
 
 const lugares: Lugar[] = [
-  { id: 'cositas', ruta: rutas.cositas, Dibujo: Frasco, pj: 'piano', x: 12, y: 40 },
-  { id: 'recuerditos', ruta: rutas.recuerditos, Dibujo: Polaroids, pj: 'twinStars', x: 31, y: 70 },
-  { id: 'cartita', ruta: rutas.cartita, Dibujo: Buzon, pj: 'kitty', x: 50, y: 36 },
-  { id: 'regalito', ruta: rutas.regalito, Dibujo: RegaloMini, pj: 'flat', x: 69, y: 70 },
-  { id: 'extranes', ruta: rutas.extranes, Dibujo: Globo, pj: 'cinnamoroll', x: 88, y: 40 },
+  { id: 'cositas', ruta: rutas.cositas, Dibujo: Frasco, pj: 'piano', x: 9, y: 42 },
+  { id: 'recuerditos', ruta: rutas.recuerditos, Dibujo: Polaroids, pj: 'twinStars', x: 25, y: 72 },
+  { id: 'cartita', ruta: rutas.cartita, Dibujo: Buzon, pj: 'flat', x: 41, y: 38 },
+  { id: 'especial', ruta: rutas.especial, Dibujo: SobreEspecial, pj: 'melody', x: 58, y: 70 },
+  { id: 'regalito', ruta: rutas.regalito, Dibujo: RegaloMini, pj: 'kitty', x: 75, y: 40 },
+  { id: 'extranes', ruta: rutas.extranes, Dibujo: Globo, pj: 'cinnamoroll', x: 91, y: 66 },
 ]
 
 export default function Mundo() {
@@ -44,18 +45,20 @@ export default function Mundo() {
   const [visitas] = useState(leerVisitas)
   const [secreto, setSecreto] = useState(false)
   const [disparoSecreto, setDisparoSecreto] = useState(0)
-  const [melodyHabla, setMelodyHabla] = useState(false)
+  const [habla, setHabla] = useState<'melody' | 'kitty' | null>(null)
   const [finalAbierto, setFinalAbierto] = useState(false)
   const temporizador = useRef<number>(undefined)
   const todoVisto = lugares.every((l) => visitas.includes(l.id))
 
   useEffect(() => {
-    const t1 = window.setTimeout(() => setMelodyHabla(true), 1600)
-    const t2 = window.setTimeout(() => setMelodyHabla(false), 6200)
+    const t1 = window.setTimeout(() => setHabla('melody'), 1600)
+    const t2 = window.setTimeout(() => setHabla('kitty'), 5200)
+    const t4 = window.setTimeout(() => setHabla((h) => (h === 'kitty' ? null : h)), 9200)
     const t3 = todoVisto ? window.setTimeout(() => setFinalAbierto(true), 1400) : undefined
     return () => {
       window.clearTimeout(t1)
       window.clearTimeout(t2)
+      window.clearTimeout(t4)
       window.clearTimeout(t3)
       window.clearTimeout(temporizador.current)
     }
@@ -68,8 +71,8 @@ export default function Mundo() {
     temporizador.current = window.setTimeout(() => setSecreto(false), 7000)
   }
 
-  const saludarMelody = () => {
-    setMelodyHabla((v) => !v)
+  const saludar = (quien: 'melody' | 'kitty') => {
+    setHabla((h) => (h === quien ? null : quien))
   }
 
   return (
@@ -126,17 +129,21 @@ export default function Mundo() {
           <path d="M50 -10 C 20 60, 20 140, 30 200 S 75 320, 70 400 S 25 520, 30 600 S 75 720, 70 800 S 40 940, 50 1010" />
         </svg>
 
-        {/* My Melody da la bienvenida */}
+        {/* My Melody y Hello Kitty dan la bienvenida */}
         <motion.div
-          className="mundo__melody"
+          className="mundo__anfitrionas"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.7, ease: suave }}
         >
-          <button type="button" className="mundo__melody-boton personaje-reactivo" onClick={saludarMelody} aria-label="Saludar a My Melody">
+          <button type="button" className="mundo__anfitriona mundo__anfitriona--melody personaje-reactivo" onClick={() => saludar('melody')} aria-label="Saludar a My Melody">
             <Personaje id="melody" />
           </button>
-          <Burbuja visible={melodyHabla} texto={mundo.melodyDice} lado="izquierda" className="mundo__melody-burbuja" />
+          <button type="button" className="mundo__anfitriona mundo__anfitriona--kitty personaje-reactivo" onClick={() => saludar('kitty')} aria-label="Saludar a Hello Kitty">
+            <Personaje id="kitty" />
+          </button>
+          <Burbuja visible={habla === 'melody'} texto={mundo.melodyDice} lado="abajo" className="mundo__anfitrionas-burbuja" />
+          <Burbuja visible={habla === 'kitty'} texto={mundo.kittyDice} lado="abajo" className="mundo__anfitrionas-burbuja" />
         </motion.div>
 
         <ul className="mundo__lugares">

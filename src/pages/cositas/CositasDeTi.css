@@ -82,7 +82,7 @@
 .escena-tiendita__maceta-flor--1 { left: 5%; rotate: -10deg; }
 .escena-tiendita__maceta-flor--2 { right: 6%; width: clamp(30px, 3vw, 48px); rotate: 12deg; }
 
-.escena-tiendita__kitty {
+.escena-tiendita__asomado {
   left: clamp(-24px, -1vw, 0px);
   bottom: calc(var(--alto-estante) - 14px);
   width: clamp(80px, 9vw, 150px);
@@ -224,7 +224,7 @@
   background: var(--crema);
   box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px var(--rosa-300), var(--sombra-3);
 }
-.cositas__final-melody { width: 74px; flex: none; }
+.cositas__final-pj { width: 74px; flex: none; }
 .cositas__final-titulo { font-family: var(--f-display); font-weight: 600; font-size: 1.15rem; color: var(--cereza-suave); }
 .cositas__final-texto { font-size: 1.25rem; line-height: 1.15; }
 
@@ -330,5 +330,5 @@
   .cositas__pj { bottom: 24px; }
   .cositas__pj--piano { left: -2%; width: 26vw; }
   .cositas__pj--flat { right: 0; width: 20vw; }
-  .escena-tiendita__estante, .escena-tiendita__kitty { display: none; }
+  .escena-tiendita__estante, .escena-tiendita__asomado { display: none; }
 }

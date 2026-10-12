@@ -16,6 +16,8 @@ type Props = {
   duracionMaxima?: number
   /** Se llama cuando terminó de escribirse. */
   onComplete?: () => void
+  /** Se llama cuando empieza a escribirse (o al instante, con movimiento reducido). */
+  onStart?: () => void
   /** Permite encadenar textos: no empieza hasta que sea true (además de estar visible). */
   start?: boolean
   id?: string
@@ -36,6 +38,7 @@ export function TypewriterOnScroll({
   as: Etiqueta = 'p',
   duracionMaxima = 2600,
   onComplete,
+  onStart,
   id,
   start = true,
 }: Props) {
@@ -44,8 +47,10 @@ export function TypewriterOnScroll({
   const [visible, setVisible] = useState(false)
   const [escritas, setEscritas] = useState(0)
   const terminadoRef = useRef(onComplete)
+  const inicioRef = useRef(onStart)
   useEffect(() => {
     terminadoRef.current = onComplete
+    inicioRef.current = onStart
   })
 
   // 1. Detectar cuándo entra en pantalla
@@ -73,6 +78,7 @@ export function TypewriterOnScroll({
   const completo = reducir || escritas >= total
   useEffect(() => {
     if (reducir) {
+      if (start) inicioRef.current?.()
       terminadoRef.current?.()
       return
     }
@@ -83,6 +89,7 @@ export function TypewriterOnScroll({
     let actual = 0
     let intervalo: number | undefined
     const inicio = window.setTimeout(() => {
+      inicioRef.current?.()
       intervalo = window.setInterval(() => {
         actual = Math.min(total, actual + porPaso)
         setEscritas(actual)

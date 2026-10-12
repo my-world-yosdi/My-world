@@ -103,15 +103,16 @@
 .album__intro { margin-top: 0.4rem; max-width: 46ch; font-size: clamp(1.25rem, min(1.7vw, 3.6vh), 1.6rem); line-height: 1.2; }
 
 .album__fotos {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 250px));
   justify-content: center;
   gap: clamp(30px, 5vh, 52px) clamp(14px, 1.7vw, 30px);
   margin-top: clamp(22px, 4.4vh, 46px);
 }
 .album__item {
   position: relative;
-  width: clamp(150px, min(13.4vw, 30vh), 250px);
+  width: min(100%, clamp(150px, min(13.4vw, 30vh), 250px));
+  justify-self: center;
   rotate: var(--rot);
   translate: 0 var(--desnivel);
   transition: rotate 0.7s var(--ease-salida), translate 0.7s var(--ease-salida);
@@ -277,10 +278,16 @@
 }
 .visor__flecha:active, .visor__cerrar:active { transform: scale(0.92); }
 
+/* ---------- Pantallas medianas: 3 columnas ---------- */
+@media (max-width: 1200px) {
+  .album__fotos { grid-template-columns: repeat(3, minmax(0, 250px)); }
+  .album__item { width: min(100%, clamp(150px, 22vw, 250px)); }
+}
+
 /* ---------- Tablet y móvil ---------- */
 @media (max-width: 820px) {
   .album { margin-top: 76px; }
-  .album__fotos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 18px; }
+  .album__fotos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 18px; }
   .album__item { width: auto; }
   .visor-fondo { padding: 70px 16px 90px; place-items: start center; }
   .visor { grid-template-columns: 1fr; justify-items: center; gap: 22px; }

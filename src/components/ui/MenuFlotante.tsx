@@ -12,6 +12,7 @@ const enlaces: { ruta: string; texto: string; Icono: Icono; color: string }[] = 
   { ruta: rutas.cositas, texto: paginas.cositas.corto, Icono: Corazon, color: '#F28AAE' },
   { ruta: rutas.recuerditos, texto: paginas.recuerditos.corto, Icono: Flor, color: '#FFC2D6' },
   { ruta: rutas.cartita, texto: paginas.cartita.corto, Icono: Mariposa, color: '#C9B6F0' },
+  { ruta: rutas.especial, texto: paginas.especial.corto, Icono: Corazon, color: '#E25C7A' },
   { ruta: rutas.regalito, texto: paginas.regalito.corto, Icono: Mono, color: '#E25C7A' },
   { ruta: rutas.extranes, texto: paginas.extranes.corto, Icono: Estrella, color: '#FFE08A' },
 ]

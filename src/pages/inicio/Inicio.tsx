@@ -18,10 +18,10 @@ import './Inicio.css'
 
 const suave = [0.22, 0.8, 0.26, 1] as const
 
-/** Orden de aparición de los personajes alrededor de My Melody. */
+/** Orden de aparición: primero las dos protagonistas, luego sus amigos alrededor. */
 const elenco: { id: PersonajeId; desde: { x?: number; y?: number }; retraso: number; burbuja: 'abajo' | 'izquierda' | 'derecha' }[] = [
   { id: 'melody', desde: { y: 40 }, retraso: 0.55, burbuja: 'abajo' },
-  { id: 'kitty', desde: { x: -30, y: 20 }, retraso: 0.85, burbuja: 'abajo' },
+  { id: 'kitty', desde: { x: -30, y: 30 }, retraso: 0.75, burbuja: 'abajo' },
   { id: 'piano', desde: { x: 30, y: 20 }, retraso: 0.95, burbuja: 'abajo' },
   { id: 'flat', desde: { y: 30 }, retraso: 1.05, burbuja: 'abajo' },
   { id: 'cinnamoroll', desde: { x: 60, y: -20 }, retraso: 1.25, burbuja: 'derecha' },
