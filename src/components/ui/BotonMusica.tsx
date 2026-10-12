@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { general } from '../../data/mensajes'
 import { musica } from '../../data/musica'
+import { recurso } from '../../lib/recurso'
 
 /**
  * Botón opcional de música. Solo aparece si hay un archivo configurado en `src/data/musica.ts`
@@ -34,7 +35,7 @@ export function BotonMusica() {
 
   return (
     <>
-      <audio ref={audioRef} src={musica.archivo} loop preload="none" />
+      <audio ref={audioRef} src={recurso(musica.archivo)} loop preload="none" />
       <button
         type="button"
         className={`boton-musica ${sonando ? 'esta-sonando' : ''}`}

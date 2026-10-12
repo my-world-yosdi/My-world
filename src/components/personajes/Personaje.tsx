@@ -1,5 +1,6 @@
 import { useState, type ComponentType, type CSSProperties, type SVGProps } from 'react'
 import { personajes, type PersonajeId } from '../../data/personajes'
+import { recurso } from '../../lib/recurso'
 import {
   CinnamorollIlustracion,
   FlatIlustracion,
@@ -40,7 +41,7 @@ export function Personaje({ id, className, style, decorativo = true, prioridad =
   if (datos.imagen && !fallo) {
     return (
       <img
-        src={datos.imagen}
+        src={recurso(datos.imagen)}
         alt={decorativo ? '' : datos.nombre}
         className={clases}
         style={style}

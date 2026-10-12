@@ -4,6 +4,7 @@ import { general, paginas, recuerditos, type Recuerdo } from '../../data/mensaje
 import type { PersonajeId } from '../../data/personajes'
 import { marcarVisita } from '../../lib/visitas'
 import { crearAleatorio, entre } from '../../lib/aleatorio'
+import { recurso } from '../../lib/recurso'
 import { useDialogo } from '../../hooks/useDialogo'
 import { Contenido } from '../../components/ui/Pagina'
 import { BotonVolver } from '../../components/ui/BotonVolver'
@@ -37,7 +38,7 @@ function FotoContenido({ recuerdo, indice }: { recuerdo: Recuerdo; indice: numbe
   const [fallo, setFallo] = useState(false)
   const [claro, oscuro] = paletas[indice % paletas.length]
   if (recuerdo.foto && !fallo) {
-    return <img className="foto__img" src={recuerdo.foto} alt={recuerdo.titulo} loading="lazy" decoding="async" draggable={false} onError={() => setFallo(true)} />
+    return <img className="foto__img" src={recurso(recuerdo.foto)} alt={recuerdo.titulo} loading="lazy" decoding="async" draggable={false} onError={() => setFallo(true)} />
   }
   return (
     <div className="foto__vacia" style={{ '--claro': claro, '--oscuro': oscuro } as CSSProperties}>

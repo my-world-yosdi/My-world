@@ -51,5 +51,7 @@ src/
 
 ## Publicar
 
-Usa rutas reales (`BrowserRouter`), así que el hosting debe redirigir todas las rutas a `index.html`
-(en Netlify: archivo `_redirects` con `/* /index.html 200`; en Vercel funciona solo con Vite).
+Está publicado en GitHub Pages: **https://einyehl322.github.io/My-world/**
+
+Cada `git push` a `main` vuelve a publicarlo solo (workflow en `.github/workflows/deploy.yml`).
+Para fotos, imágenes y música escribe las rutas como `/assets/...`; el prefijo `/My-world/` se agrega automáticamente.
