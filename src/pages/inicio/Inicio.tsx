@@ -62,14 +62,7 @@ export default function Inicio() {
       <div className="inicio__composicion contenido-escena">
         {/* Texto */}
         <section className="inicio__texto" aria-labelledby="inicio-titulo">
-          <motion.p
-            className="antetitulo inicio__antetitulo"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25, ease: suave }}
-          >
-            {inicio.antetitulo}
-          </motion.p>
+          <TypewriterOnScroll className="antetitulo inicio__antetitulo" text={inicio.antetitulo} speed={75} delay={300} duracionMaxima={2000} />
           <h1 id="inicio-titulo" className="titulo-display inicio__titulo">
             <motion.span
               className="inicio__titulo-linea"
@@ -100,7 +93,7 @@ export default function Inicio() {
               </svg>
             </motion.em>
           </h1>
-          <TypewriterOnScroll className="texto-intro inicio__subtitulo" text={inicio.subtitulo} speed={28} delay={1000} />
+          <TypewriterOnScroll className="texto-intro inicio__subtitulo" text={inicio.subtitulo} speed={40} delay={1500} duracionMaxima={4000} />
           <motion.div
             className="inicio__accion"
             initial={{ opacity: 0, y: 16 }}
@@ -128,6 +121,13 @@ export default function Inicio() {
               <MarcoOval />
               <Mono className="inicio__marco-mono" color="#E25C7A" />
             </motion.div>
+            <motion.span
+              className="inicio__halo"
+              aria-hidden="true"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.4, delay: 0.5, ease: suave }}
+            />
             <motion.div
               className="inicio__pedestal"
               initial={{ opacity: 0, y: 20 }}
@@ -152,7 +152,7 @@ export default function Inicio() {
                     aria-label={`Saludar a ${personajes[id].nombre}`}
                     onClick={() => saludar(id)}
                   >
-                    <Personaje id={id} prioridad />
+                    <Personaje id={id} prioridad hero />
                   </button>
                 </div>
                 <Burbuja visible={hablando === id} texto={inicio.saludos[id]} lado={burbuja} className="inicio__burbuja" />

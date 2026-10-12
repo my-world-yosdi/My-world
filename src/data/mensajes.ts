@@ -236,8 +236,8 @@ export const extranes = {
   sobres: [
     { etiqueta: 'para ahora mismo', mensaje: 'Te mando un abracito desde aquí.' },
     { etiqueta: 'para un día largo', mensaje: 'Espero que hoy te esté yendo bonito.' },
-    { etiqueta: 'para cuando estés aburrida', mensaje: 'Ojalá pudiera estar contigo un ratito.' },
-    { etiqueta: 'para antes de dormir', mensaje: `Por si todavía no te lo dije hoy: te quiero, ${ella}.` },
+    { etiqueta: 'para cuando estés aburrida', mensaje: 'Ojalá siempre pudiera estar a tu lado.' },
+    { etiqueta: 'para antes de dormir', mensaje: 'Por si no te lo repetí 500 veces, quiero que sepas lo mucho que te quiero y te deseo.' },
     { etiqueta: 'para cuando quieras', mensaje: 'Me acordé de ti. Bueno, me pasa bastante seguido.' },
     { etiqueta: 'para un día pesado', mensaje: 'Si hoy fue pesado, descansa un rato. Después me cuentas todo.' },
   ],

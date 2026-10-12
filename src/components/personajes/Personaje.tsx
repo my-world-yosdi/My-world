@@ -27,21 +27,25 @@ type Props = {
   decorativo?: boolean
   /** Las imágenes de la portada se cargan de inmediato; el resto, de forma diferida. */
   prioridad?: boolean
+  /** Usa la imagen especial de portada si existe. */
+  hero?: boolean
 }
 
 /**
  * Muestra la imagen configurada del personaje o, si no hay (o falla), su ilustración provisional.
  */
-export function Personaje({ id, className, style, decorativo = true, prioridad = false }: Props) {
+export function Personaje({ id, className, style, decorativo = true, prioridad = false, hero = false }: Props) {
   const datos = personajes[id]
   const [fallo, setFallo] = useState(false)
   const Ilustracion = ilustraciones[id]
   const clases = ['personaje', `personaje--${id}`, className].filter(Boolean).join(' ')
 
-  if (datos.imagen && !fallo) {
+  const imagen = (hero && datos.imagenHero) || datos.imagen
+
+  if (imagen && !fallo) {
     return (
       <img
-        src={recurso(datos.imagen)}
+        src={recurso(imagen)}
         alt={decorativo ? '' : datos.nombre}
         className={clases}
         style={style}

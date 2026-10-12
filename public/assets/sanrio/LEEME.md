@@ -6,6 +6,7 @@ Nombres sugeridos:
 
 | Personaje         | Archivo                 |
 | ----------------- | ----------------------- |
+| My Melody (portada) | `my-melody-hero.png`  |
 | My Melody         | `my-melody.png`         |
 | My Sweet Piano    | `my-sweet-piano.png`    |
 | Flat              | `flat.png`              |
