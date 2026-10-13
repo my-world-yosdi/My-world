@@ -54,5 +54,20 @@ src/
 
 ## Publicar
 
-Cada `git push` a `main` vuelve a publicarlo solo (workflow en `.github/workflows/deploy.yml`).
-Para fotos, imágenes y música escribe las rutas como `/assets/...`; el prefijo `/My-world/` se agrega automáticamente.
+Está en Vercel: **cada `git push` a `main` lo publica solo** (el repo está conectado al proyecto `my-world`).
+El workflow de GitHub Pages (`.github/workflows/deploy.yml`) está desactivado.
+Para fotos, imágenes y música escribe las rutas como `/assets/...`.
+
+### Primera vez en otra computadora
+
+```bash
+git clone https://github.com/Einyehl322/My-world.git
+cd My-world
+npm install
+npm run preparar   # una sola vez: firma los commits como Einyehl322
+npm run dev
+```
+
+`npm run preparar` es necesario porque en el plan gratis Vercel solo publica commits cuyo autor es el dueño del repo.
+Si se salta, el `git push` sube igual pero el deploy en Vercel queda **bloqueado**. Solo cambia la configuración de este repo, no la global.
+No hace falta `vercel login`, `vercel link` ni copiar ningún `.env.local`: el buzón ya trae su ID público de Formspree.
