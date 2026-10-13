@@ -11,8 +11,12 @@
  *   - en GitHub Pages: "variables" del repositorio, que el workflow pasa al compilar.
  */
 export const buzon = {
-  /** ID del formulario de Formspree: lo que va después de /f/ en https://formspree.io/f/xxxxxxxx */
-  formspreeId: import.meta.env.VITE_FORMSPREE_FORM_ID ?? '',
+  /**
+   * ID del formulario de Formspree: lo que va después de /f/ en https://formspree.io/f/xxxxxxxx
+   * Es público (va en el JavaScript de la página), así que se deja aquí para que el buzón funcione al clonar.
+   * Una variable de entorno con otro ID lo reemplaza.
+   */
+  formspreeId: import.meta.env.VITE_FORMSPREE_FORM_ID || 'xkjoqvrk',
   /** URL de la función que avisa por WhatsApp (en Vercel). Vacía = no se avisa por WhatsApp. */
   notificadorUrl: import.meta.env.VITE_NOTIFICADOR_URL ?? '',
   /** Site key PÚBLICA de Cloudflare Turnstile, que protege al notificador de robots. Vacía = sin Turnstile. */
