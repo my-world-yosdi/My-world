@@ -1,0 +1,9 @@
+{
+  "name": "my-world-notificador",
+  "private": true,
+  "description": "Función serverless (Vercel) que avisa por WhatsApp cuando llega una cartita nueva",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

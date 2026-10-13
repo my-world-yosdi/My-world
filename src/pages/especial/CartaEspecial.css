@@ -375,6 +375,96 @@
   outline-offset: -3px;
 }
 .cesp-papel__estampilla > * { background: var(--rosa-100); }
+/* Foto tipo polaroid pegada con cinta washi; el texto la rodea */
+.cesp-papel__polaroid {
+  position: relative;
+  float: right;
+  width: 104px;
+  margin: -6px -4px 10px 14px;
+  padding: 6px 6px 22px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(120 50 80 / 0.15), 0 8px 18px -8px rgb(120 50 80 / 0.4);
+}
+.cesp-papel__polaroid img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+.cesp-papel__polaroid::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 58%;
+  height: 20px;
+  translate: -50% 0;
+  rotate: -6deg;
+  background: repeating-linear-gradient(90deg, rgb(247 169 198 / 0.75) 0 6px, rgb(255 226 236 / 0.75) 6px 12px);
+  box-shadow: 0 1px 2px rgb(120 50 80 / 0.12);
+}
+.cesp-papel__polaroid + .cesp-papel__para, .cesp-papel__polaroid ~ .cesp-papel__titulo { padding-right: 0; }
+.cesp-papel__polaroid-boton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  outline-offset: 6px;
+}
+/* Al pasar el mouse se endereza y se levanta un poquito (compensa la inclinación de 4° que le da la animación) */
+.cesp-papel__polaroid { transition: rotate 0.5s var(--ease-salida), scale 0.5s var(--ease-salida), translate 0.5s var(--ease-salida), box-shadow 0.5s; }
+@media (hover: hover) and (pointer: fine) {
+  .cesp-papel__polaroid:hover {
+    rotate: -4deg;
+    scale: 1.05;
+    translate: 0 -4px;
+    box-shadow: 0 2px 4px rgb(120 50 80 / 0.15), 0 16px 28px -10px rgb(120 50 80 / 0.45);
+  }
+}
+.cesp-papel__polaroid:has(:focus-visible) { rotate: -4deg; scale: 1.05; }
+
+/* ---------- Foto en grande ---------- */
+.cesp-foto-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 72px 20px 40px;
+  background: radial-gradient(circle at 50% 40%, rgb(255 240 246 / 0.9), rgb(226 120 160 / 0.82));
+  backdrop-filter: blur(8px);
+  cursor: zoom-out;
+}
+.cesp-foto { display: grid; place-items: center; }
+.cesp-foto__entrada { cursor: default; perspective: 1000px; }
+.cesp-foto__polaroid {
+  width: min(78vw, calc((100svh - 190px) * 0.8), 440px);
+  padding: 14px 14px 56px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgb(120 50 80 / 0.15), 0 30px 60px -20px rgb(120 50 80 / 0.55);
+}
+.cesp-foto__polaroid img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1px; }
+/* Brillo que sigue al cursor sobre la foto */
+.cesp-foto__brillo {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--brillo-x, 50%) var(--brillo-y, 30%), rgb(255 255 255 / 0.35), transparent 55%);
+  mix-blend-mode: soft-light;
+}
+.cesp-foto__polaroid::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: 46%;
+  height: 32px;
+  translate: -50% 0;
+  rotate: -5deg;
+  background: repeating-linear-gradient(90deg, rgb(247 169 198 / 0.8) 0 9px, rgb(255 226 236 / 0.8) 9px 18px);
+  box-shadow: 0 1px 2px rgb(120 50 80 / 0.12);
+  z-index: 1;
+}
+.cesp-foto__cerrar { z-index: 121; }
 .cesp-papel__para { font-family: var(--f-script); font-size: 1.5rem; line-height: 1.2; color: var(--cereza-suave); padding-right: 64px; }
 .cesp-papel__titulo {
   margin-top: 0.4rem;
@@ -436,6 +526,8 @@
   .cesp-lectura__cerrar { top: 20px; right: 24px; width: 50px; height: 50px; }
   .cesp-papel__contenido { padding: 64px 70px 52px; }
   .cesp-papel__estampilla { top: 40px; right: 48px; width: 72px; }
+  .cesp-papel__polaroid { width: 150px; margin: -18px -26px 14px 22px; padding: 8px 8px 30px; }
+  .cesp-papel__polaroid::before { top: -12px; height: 24px; }
   .cesp-papel__para { font-size: 1.8rem; }
   .cesp-papel__texto { font-size: clamp(1.45rem, min(1.7vw, 3.3vh), 1.72rem); }
 }

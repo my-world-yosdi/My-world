@@ -1,22 +1,23 @@
 /* =====================================================================
-   ♡ Nuestro pequeño mundo · mapita de prado con arcoíris
+   ♡ Eres mi mundo · mapita sobre la pradera primaveral
    ===================================================================== */
 
 /* ---------- Escenario ---------- */
-.escena-mundo__cielo {
+.escena-mundo { background: #f6dbe8; }
+.escena-mundo__capa { inset: -24px; }
+.escena-mundo__fondo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+/* Velo suave: aclara arriba (título) y un poco el centro para que el mapa se lea sobre la ilustración */
+.escena-mundo__velo {
   inset: 0;
   background:
-    radial-gradient(ellipse 40% 30% at 86% 8%, #fffaf2 0%, rgb(255 250 242 / 0) 70%),
-    linear-gradient(180deg, #f1e4fb 0%, #ffe4ef 32%, #ffd6e7 62%, #fbc9dc 100%);
+    linear-gradient(180deg, rgb(255 246 250 / 0.72) 0%, rgb(255 246 250 / 0.35) 30%, rgb(255 246 250 / 0.18) 60%, rgb(255 246 250 / 0.3) 100%);
 }
-.escena-mundo__capa { inset: -24px; }
-.escena-mundo__paisaje { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; }
-.escena-mundo__nubes { inset: 0; }
-.escena-mundo__nube { position: absolute; left: 0; opacity: 0.9; filter: drop-shadow(0 8px 14px rgb(230 140 175 / 0.2)); }
-.escena-mundo__nube--1 { top: 7%; width: clamp(120px, 11vw, 200px); animation-duration: 95s; animation-delay: -20s; }
-.escena-mundo__nube--2 { top: 17%; width: clamp(80px, 7vw, 130px); animation-duration: 130s; animation-delay: -80s; opacity: 0.7; }
-.escena-mundo__nube--3 { top: 28%; width: clamp(100px, 9vw, 170px); animation-duration: 110s; animation-delay: -50s; }
-.escena-mundo__sol { top: 7%; right: 9%; width: 54px; --op: 1; animation: particula-titila 5s ease-in-out infinite; filter: drop-shadow(0 0 12px #fff); }
+/* Desenfoque suave en la franja de abajo (flores y mantel), que entra poco a poco */
+.escena-mundo__desenfoque {
+  inset: 0;
+  backdrop-filter: blur(3px);
+  mask-image: linear-gradient(180deg, transparent 64%, #000 90%);
+}
 
 /* ---------- Estructura ---------- */
 .mundo {
@@ -52,7 +53,7 @@
 .mundo__cabecera .texto-intro { margin-top: 0; max-width: 46ch; font-size: clamp(0.95rem, min(1.2vw, 2.6vh), 1.15rem); }
 
 .mundo__mapa {
-  --tam: clamp(96px, min(11vw, 21vh), 196px);
+  --tam: clamp(80px, min(7.6vw, 15vh), 140px);
   position: relative;
   flex: 1;
   width: min(100%, 1560px);
@@ -79,6 +80,8 @@
   vector-effect: non-scaling-stroke;
 }
 .mundo__camino--v { display: none; }
+/* En escritorio la ilustración ya hace de mapa: sin caminito encima */
+@media (min-width: 821px) { .mundo__camino--h { display: none; } }
 
 /* ---------- Lugares ---------- */
 .lugar {
@@ -140,6 +143,8 @@
   transition: transform 0.7s var(--ease-salida);
 }
 .lugar:nth-child(even) .lugar__pj { right: auto; left: -16%; }
+/* En escritorio la ilustración ya tiene a los personajes en grande: sin muñequito junto a cada lugar */
+@media (min-width: 821px) { .lugar__pj { display: none; } }
 
 .lugar__brillos { position: absolute; inset: 0; pointer-events: none; }
 .lugar__brillo {
@@ -160,6 +165,7 @@
   justify-items: center;
 }
 .lugar__nombre {
+  position: relative;
   display: inline-block;
   padding: 0.32em 1em 0.38em;
   border-radius: 999px;
@@ -193,14 +199,15 @@
   transition: opacity 0.35s, translate 0.5s var(--ease-salida);
   z-index: 3;
 }
+/* Corazón de "ya visitado": en la esquina de la etiqueta, para que nunca flote sobre otros textos */
 .lugar__sello {
   position: absolute;
-  top: 2%;
-  left: 4%;
+  top: -9px;
+  right: -9px;
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--cereza-suave);
   box-shadow: 0 0 0 3px #fff, var(--sombra-1);
@@ -353,7 +360,7 @@
 /* ---------- Laptop baja (1366×600) ---------- */
 @media (min-width: 821px) and (max-height: 700px) {
   .mundo__cabecera { padding-top: 46px; }
-  .mundo__mapa { --tam: clamp(90px, 19vh, 130px); }
+  .mundo__mapa { --tam: clamp(74px, 15vh, 100px); }
 }
 
 /* ---------- Tablet y móvil ---------- */

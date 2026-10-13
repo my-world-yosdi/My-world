@@ -10,6 +10,7 @@ export const rutas = {
   especial: '/carta-especial',
   regalito: '/regalito',
   extranes: '/cuando-me-extranes',
+  paraAngel: '/carta-para-angel',
 } as const
 
 const cargadores = {
@@ -20,6 +21,7 @@ const cargadores = {
   [rutas.especial]: () => import('./pages/especial/CartaEspecial'),
   [rutas.regalito]: () => import('./pages/regalito/Regalito'),
   [rutas.extranes]: () => import('./pages/extranes/CuandoMeExtranes'),
+  [rutas.paraAngel]: () => import('./pages/paraAngel/CartaParaAngel'),
 }
 
 export const Mundo = lazy(cargadores[rutas.mundo])
@@ -29,6 +31,7 @@ export const Cartita = lazy(cargadores[rutas.cartita])
 export const CartaEspecial = lazy(cargadores[rutas.especial])
 export const Regalito = lazy(cargadores[rutas.regalito])
 export const CuandoMeExtranes = lazy(cargadores[rutas.extranes])
+export const CartaParaAngel = lazy(cargadores[rutas.paraAngel])
 
 /** Descarga una página antes de que ella haga clic (al pasar el cursor o enfocar). */
 export function precargar(ruta: string) {

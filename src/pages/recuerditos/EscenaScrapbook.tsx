@@ -1,8 +1,11 @@
 import { Flor, Mariposa, Destello, Corazon } from '../../components/decor/Adornos'
 import { Particulas } from '../../components/decor/Particulas'
+import { CapaParallax } from '../../components/decor/CapaParallax'
+import { useParallax } from '../../hooks/useParallax'
 
 /** Mesa de scrapbook: papel con lunares, blonda de encaje, cintas washi, botoncitos y florecitas prensadas. */
 export function EscenaScrapbook() {
+  const parallax = useParallax()
   return (
     <div className="escenario escena-scrap">
       <div className="escena-scrap__mesa" />
@@ -20,11 +23,15 @@ export function EscenaScrapbook() {
       <Flor className="escena-scrap__flor escena-scrap__flor--1" color="#FFC2D6" />
       <Flor className="escena-scrap__flor escena-scrap__flor--2" color="#E9DDFB" />
       <Flor className="escena-scrap__flor escena-scrap__flor--3" color="#fff" />
-      <Mariposa className="escena-scrap__mariposa flotar" color="#F7A9C6" />
+      <CapaParallax parallax={parallax} profundidad={18}>
+        <Mariposa className="escena-scrap__mariposa flotar" color="#F7A9C6" />
+      </CapaParallax>
       <Corazon className="escena-scrap__corazon" color="#F28AAE" />
       <Destello className="escena-scrap__destello" color="#FFE08A" />
 
-      <Particulas cantidad={9} modo="titila" semilla={58} tipos={['destello']} colores={['#fff', '#FFE08A']} tamano={[10, 18]} />
+      <CapaParallax parallax={parallax} profundidad={8}>
+        <Particulas cantidad={9} modo="titila" semilla={58} tipos={['destello']} colores={['#fff', '#FFE08A']} tamano={[10, 18]} />
+      </CapaParallax>
     </div>
   )
 }

@@ -1,14 +1,19 @@
 import { Mono, Corazon, Flor } from '../../components/decor/Adornos'
 import { Particulas } from '../../components/decor/Particulas'
+import { CapaParallax } from '../../components/decor/CapaParallax'
+import { useParallax } from '../../hooks/useParallax'
 import { Personaje } from '../../components/personajes/Personaje'
 
 /** Tiendita de dulces: pared de cuadritos vichy, toldo a rayas con ondas, moños colgando y un estante con encaje. */
 export function EscenaTiendita() {
+  const parallax = useParallax()
   return (
     <div className="escenario escena-tiendita">
       <div className="escena-tiendita__pared" />
       <div className="escena-tiendita__luz" />
-      <Particulas cantidad={12} modo="flota" semilla={33} tipos={['corazon', 'flor', 'corazon']} tamano={[14, 30]} colores={['#F7A9C6', '#fff', '#F28AAE', '#E9DDFB']} />
+      <CapaParallax parallax={parallax} profundidad={14}>
+        <Particulas cantidad={12} modo="flota" semilla={33} tipos={['corazon', 'flor', 'corazon']} tamano={[14, 30]} colores={['#F7A9C6', '#fff', '#F28AAE', '#E9DDFB']} />
+      </CapaParallax>
 
       <div className="escena-tiendita__colgantes">
         {[8, 22, 78, 92].map((x, i) => (

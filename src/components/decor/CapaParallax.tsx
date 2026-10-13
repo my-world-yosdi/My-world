@@ -14,7 +14,7 @@ export function CapaParallax({ parallax, profundidad, className, children }: Pro
   const x = useTransform(parallax.x, (v) => v * profundidad)
   const y = useTransform(parallax.y, (v) => v * profundidad * 0.6)
   return (
-    <motion.div className={className} style={{ x, y }} aria-hidden="true">
+    <motion.div className={`capa-parallax ${className ?? ''}`} style={{ x, y }} aria-hidden="true">
       {children}
     </motion.div>
   )

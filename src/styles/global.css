@@ -166,6 +166,9 @@ main { position: relative; min-height: 100svh; }
   pointer-events: none;
 }
 .escenario > * { position: absolute; }
+/* Capas de parallax dentro del escenario: mismo lienzo que el escenario, así sus hijos se posicionan igual */
+:where(.escenario > .capa-parallax) { inset: 0; }
+:where(.escenario) > .capa-parallax > * { position: absolute; }
 .contenido-escena { position: relative; z-index: 2; }
 
 /* ---------- Partículas ---------- */
@@ -724,4 +727,17 @@ main { position: relative; min-height: 100svh; }
   }
   .particulas--sube .particula, .particulas--cae .particula { top: var(--y); opacity: var(--op); }
   .particula, .mecerse, .flotar, .derivar { animation: none !important; }
+}
+
+/* ---------- Reproductor invisible de YouTube (música de las cartas) ---------- */
+.musica-youtube {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
 }

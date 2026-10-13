@@ -1,5 +1,5 @@
 /* =====================================================================
-   ♡ Nuestros pequeños momentos · scrapbook sobre la mesa
+   ♡ Cuando estoy contigo todo es mejor · scrapbook sobre la mesa
    ===================================================================== */
 
 /* ---------- Cintas washi (compartidas) ---------- */
@@ -96,10 +96,10 @@
   display: inline-block;
   padding: 0.2em 0.8em 0.28em;
   background: #fff;
-  rotate: -1.2deg;
   box-shadow: 0 6px 14px -6px rgb(160 60 100 / 0.3);
   clip-path: polygon(0 6%, 4% 0, 9% 5%, 15% 1%, 22% 6%, 30% 0, 38% 4%, 46% 0, 54% 5%, 62% 1%, 70% 6%, 78% 0, 86% 5%, 93% 1%, 100% 6%, 99% 50%, 100% 94%, 95% 100%, 88% 95%, 80% 100%, 72% 96%, 64% 100%, 56% 95%, 48% 100%, 40% 96%, 32% 100%, 24% 95%, 16% 100%, 8% 96%, 0 100%, 1% 50%);
 }
+.album__titulo-corazon { display: inline-block; width: 0.78em; height: auto; vertical-align: -0.04em; margin-left: 0.08em; }
 .album__intro { margin-top: 0.4rem; max-width: 46ch; font-size: clamp(1.25rem, min(1.7vw, 3.6vh), 1.6rem); line-height: 1.2; }
 
 .album__fotos {
@@ -227,15 +227,55 @@
 .visor__polaroid {
   position: relative;
   width: min(80vw, calc((82svh - 70px) / 0.92), 540px);
-  padding: 7% 7% 0;
+  perspective: 1400px;
+  touch-action: pan-y;
+}
+/* Polaroid que gira en 3D: cara de frente con la foto y reverso de papel */
+.giro { position: relative; transform-style: preserve-3d; }
+@media (hover: hover) and (pointer: fine) {
+  .giro { cursor: grab; }
+  .giro:active { cursor: grabbing; }
+}
+.giro__cara {
   border-radius: 3px;
   text-align: center;
   background: #fffdfa;
   box-shadow: var(--sombra-3);
-  cursor: grab;
-  touch-action: pan-y;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
-.visor__polaroid:active { cursor: grabbing; }
+.giro__frente { position: relative; padding: 7% 7% 0; }
+/* Las fotos reales se ven completas en el visor, con su forma original; el marco se ajusta a ellas */
+.visor__polaroid:has(.foto__img) { width: auto; }
+.visor__polaroid:has(.foto__img) .giro__frente { padding: clamp(14px, 2.2vw, 28px) clamp(14px, 2.2vw, 28px) 0; }
+.visor__polaroid .polaroid__foto:has(.foto__img) { aspect-ratio: auto; }
+.visor__polaroid .foto__img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(72vw, 480px);
+  max-height: calc(82svh - 130px);
+  object-fit: contain;
+  object-position: center !important;
+}
+.giro__dorso {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 10%;
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(circle, rgb(214 160 170 / 0.1) 1px, transparent 1.4px) 0 0 / 8px 8px,
+    linear-gradient(160deg, #fffdf8, #f8efe6);
+}
+.giro__dorso-titulo { font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.1; color: var(--cereza-oscuro); rotate: -4deg; }
+.visor__giro { display: none; margin-top: 0.3rem; font-size: 0.85rem; color: var(--tinta-suave); }
+@media (hover: hover) and (pointer: fine) {
+  .visor__giro { display: block; }
+}
 .visor__polaroid .polaroid__pie { font-size: clamp(1.4rem, 2vw, 1.9rem); }
 .visor__polaroid .polaroid__cinta { height: 28px; top: -14px; }
 
@@ -292,6 +332,7 @@
   .visor-fondo { padding: 70px 16px 90px; place-items: start center; }
   .visor { grid-template-columns: 1fr; justify-items: center; gap: 22px; }
   .visor__polaroid { width: min(84vw, 52svh, 440px); }
+  .visor__polaroid .foto__img { max-width: calc(84vw - 28px); max-height: 50svh; }
   .visor__nota { width: min(84vw, 440px); }
   .visor__flecha { top: auto; bottom: 18px; translate: none; }
   .visor__flecha--izq { left: calc(50% - 64px); }

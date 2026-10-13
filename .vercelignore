@@ -1,0 +1,8 @@
+# Lo que NO se sube a Vercel al publicar la página
+node_modules
+dist
+.env
+.env.*
+!.env.example
+# El notificador de WhatsApp es otro proyecto de Vercel (Root Directory: notificador)
+notificador

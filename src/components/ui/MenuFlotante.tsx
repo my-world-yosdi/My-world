@@ -15,6 +15,7 @@ const enlaces: { ruta: string; texto: string; Icono: Icono; color: string }[] = 
   { ruta: rutas.especial, texto: paginas.especial.corto, Icono: Corazon, color: '#E25C7A' },
   { ruta: rutas.regalito, texto: paginas.regalito.corto, Icono: Mono, color: '#E25C7A' },
   { ruta: rutas.extranes, texto: paginas.extranes.corto, Icono: Estrella, color: '#FFE08A' },
+  { ruta: rutas.paraAngel, texto: paginas.paraAngel.corto, Icono: Flor, color: '#F7A9C6' },
 ]
 
 const suave = [0.22, 0.8, 0.26, 1] as const

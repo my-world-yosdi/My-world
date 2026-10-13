@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Variables de entorno (los valores reales nunca se suben)
+.env
+.env.*
+!.env.example
+notificador/.env
+notificador/.env.*
+!notificador/.env.example
+.vercel

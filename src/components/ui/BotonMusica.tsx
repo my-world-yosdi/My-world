@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { general } from '../../data/mensajes'
 import { musica } from '../../data/musica'
 import { recurso } from '../../lib/recurso'
+import { EVENTO_MUSICA_CARTA } from '../../hooks/useMusicaCarta'
 
 /**
  * Botón opcional de música. Solo aparece si hay un archivo configurado en `src/data/musica.ts`
@@ -13,6 +14,25 @@ export function BotonMusica() {
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = musica.volumen
+  }, [])
+
+  // Mientras suena la canción de una carta, la música de fondo se pausa y luego vuelve
+  const pausadaPorCarta = useRef(false)
+  useEffect(() => {
+    const alCambiar = (e: Event) => {
+      const audio = audioRef.current
+      if (!audio) return
+      if ((e as CustomEvent).detail === 'inicio' && !audio.paused) {
+        pausadaPorCarta.current = true
+        audio.pause()
+        setSonando(false)
+      } else if ((e as CustomEvent).detail === 'fin' && pausadaPorCarta.current) {
+        pausadaPorCarta.current = false
+        void audio.play().then(() => setSonando(true)).catch(() => {})
+      }
+    }
+    window.addEventListener(EVENTO_MUSICA_CARTA, alCambiar)
+    return () => window.removeEventListener(EVENTO_MUSICA_CARTA, alCambiar)
   }, [])
 
   if (!musica.archivo) return null

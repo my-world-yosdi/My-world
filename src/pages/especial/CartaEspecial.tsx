@@ -4,7 +4,10 @@ import { AnimatePresence, motion } from 'motion/react'
 import { cartaEspecial, general, paginas } from '../../data/mensajes'
 import { rutas } from '../../rutas'
 import { marcarVisita } from '../../lib/visitas'
+import { recurso } from '../../lib/recurso'
 import { useDialogo } from '../../hooks/useDialogo'
+import { useMusicaCarta } from '../../hooks/useMusicaCarta'
+import { musicaCartas } from '../../data/musica'
 import { Contenido } from '../../components/ui/Pagina'
 import { BotonVolver } from '../../components/ui/BotonVolver'
 import { BotonLazo } from '../../components/ui/BotonLazo'
@@ -12,6 +15,7 @@ import { TypewriterOnScroll } from '../../components/ui/TypewriterOnScroll'
 import { Personaje } from '../../components/personajes/Personaje'
 import { Corazon, LINEA, Mono, RUTA_CORAZON } from '../../components/decor/Adornos'
 import { Estallido } from '../../components/decor/Estallido'
+import { Inclinable } from '../../components/ui/Inclinable'
 import { EscenaRincon } from './EscenaRincon'
 import './CartaEspecial.css'
 
@@ -58,7 +62,10 @@ export default function CartaEspecial() {
   const [momento, setMomento] = useState(false)
   const [disparo, setDisparo] = useState(0)
   const temporizadores = useRef<number[]>([])
+  const musica = useMusicaCarta(musicaCartas.especial)
   const lecturaRef = useRef<HTMLDivElement>(null)
+  const [fotoGrande, setFotoGrande] = useState(false)
+  const visorFotoRef = useRef<HTMLDivElement>(null)
 
   const abierto = fase !== 'cerrado'
   const cartaArriba = fase === 'abriendo' || fase === 'leyendo'
@@ -78,6 +85,7 @@ export default function CartaEspecial() {
   const abrir = () => {
     if (fase !== 'cerrado') return
     setFase('abriendo')
+    musica.reproducir()
     setParrafo(0)
     setMomento(false)
     despues(1500, () => setDisparo((n) => n + 1))
@@ -87,11 +95,14 @@ export default function CartaEspecial() {
   const guardar = () => {
     if (fase !== 'leyendo') return
     setFase('guardando')
+    musica.detener()
+    setFotoGrande(false)
     setYaLeida(true)
     despues(1100, () => setFase('cerrado'))
   }
 
   useDialogo(fase === 'leyendo', guardar, lecturaRef)
+  useDialogo(fotoGrande, () => setFotoGrande(false), visorFotoRef)
 
   // Tiempos distintos al abrir y al guardar, para que todo vaya en orden
   const t = (alAbrir: object, alCerrar: object) => (abierto ? alAbrir : alCerrar)
@@ -356,9 +367,23 @@ export default function CartaEspecial() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.75, duration: 0.7 }}
               >
-                <span className="cesp-papel__estampilla" aria-hidden="true">
-                  <Personaje id="melody" />
-                </span>
+                {cartaEspecial.foto.archivo ? (
+                  // Cae del sobre un ratito después de abrir la carta; ya ocupa su lugar desde el inicio para que el texto no salte
+                  <motion.figure
+                    className="cesp-papel__polaroid"
+                    initial={{ opacity: 0, y: -70, rotate: -14, scale: 0.92 }}
+                    animate={{ opacity: 1, y: 0, rotate: 4, scale: 1 }}
+                    transition={{ delay: 1.9, duration: 1.2, ease: suave, opacity: { delay: 1.9, duration: 0.5 } }}
+                  >
+                    <button type="button" className="cesp-papel__polaroid-boton" onClick={() => setFotoGrande(true)} aria-label={cartaEspecial.foto.ver}>
+                      <img src={recurso(cartaEspecial.foto.archivo)} alt={cartaEspecial.foto.alt} width={575} height={719} decoding="async" draggable={false} />
+                    </button>
+                  </motion.figure>
+                ) : (
+                  <span className="cesp-papel__estampilla" aria-hidden="true">
+                    <Personaje id="melody" />
+                  </span>
+                )}
                 <p className="cesp-papel__para">{cartaEspecial.etiquetaSobre}</p>
                 <h2 id="cesp-titulo-carta" className="cesp-papel__titulo">{cartaEspecial.titulo}</h2>
                 <span className="cesp-papel__separador" aria-hidden="true">
@@ -426,6 +451,38 @@ export default function CartaEspecial() {
                 </div>
               </motion.div>
             </motion.article>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* La foto de la carta en grande: se inclina siguiendo el cursor */}
+      <AnimatePresence>
+        {fotoGrande && cartaEspecial.foto.archivo && (
+          <motion.div
+            className="cesp-foto-fondo"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            onClick={() => setFotoGrande(false)}
+          >
+            <div ref={visorFotoRef} className="cesp-foto" role="dialog" aria-modal="true" aria-label={cartaEspecial.foto.alt}>
+              <motion.div
+                className="cesp-foto__entrada"
+                initial={{ opacity: 0, scale: 0.6, rotate: 6, y: 40 }}
+                animate={{ opacity: 1, scale: 1, rotate: -2, y: 0 }}
+                exit={{ opacity: 0, scale: 0.75, rotate: 5, y: 30 }}
+                transition={{ duration: 0.7, ease: suave }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Inclinable className="cesp-foto__polaroid" grados={10}>
+                  <img src={recurso(cartaEspecial.foto.archivo)} alt={cartaEspecial.foto.alt} width={575} height={719} draggable={false} />
+                  <span className="cesp-foto__brillo" aria-hidden="true" />
+                </Inclinable>
+              </motion.div>
+              <button type="button" className="cesp-lectura__cerrar cesp-foto__cerrar" onClick={() => setFotoGrande(false)} aria-label={general.cerrar} data-foco-inicial>
+                ×
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

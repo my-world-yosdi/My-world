@@ -35,6 +35,9 @@ Mientras falte una imagen se muestra una ilustración provisional, nunca una ima
 | `/cartita`            | Habitación con el sobre y la carta          |
 | `/regalito`           | Teatrito con la caja de regalo              |
 | `/cuando-me-extranes` | Tendedero de sobrecitos al atardecer        |
+| `/carta-para-angel`   | Escritorio de cartitas: Yosdi le escribe a Ángel (correo + aviso por WhatsApp) |
+
+**Buzón de cartitas:** la configuración de Formspree, WhatsApp, Turnstile y Vercel está en [`notificador/README.md`](notificador/README.md). Las variables públicas van en `.env.local` (guía: `.env.example`); las privadas, solo en Vercel.
 
 ## Estructura
 
@@ -50,8 +53,6 @@ src/
 ```
 
 ## Publicar
-
-Está publicado en GitHub Pages: **https://einyehl322.github.io/My-world/**
 
 Cada `git push` a `main` vuelve a publicarlo solo (workflow en `.github/workflows/deploy.yml`).
 Para fotos, imágenes y música escribe las rutas como `/assets/...`; el prefijo `/My-world/` se agrega automáticamente.

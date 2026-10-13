@@ -36,8 +36,8 @@ export const general = {
 /** Nombres de cada página: se usan en el menú, el mapa y los títulos. */
 export const paginas = {
   mundo: {
-    titulo: 'Nuestro pequeño mundo',
-    corto: 'Nuestro mundito',
+    titulo: 'Eres mi mundo',
+    corto: 'Eres mi mundo',
     descripcion: 'El mapita con todo',
   },
   cositas: {
@@ -46,7 +46,7 @@ export const paginas = {
     descripcion: 'Un frasquito lleno de cosas que me gustan de ti',
   },
   recuerditos: {
-    titulo: 'Nuestros pequeños momentos ♡',
+    titulo: 'Cuando estoy contigo todo es mejor',
     corto: 'Recuerditos',
     descripcion: 'Fotos que me gusta volver a ver',
   },
@@ -64,6 +64,11 @@ export const paginas = {
     titulo: 'Algo que quiero vivir contigo ♡',
     corto: 'Una cartita especial ♡',
     descripcion: 'Esta es más personal. Léela con calma',
+  },
+  paraAngel: {
+    titulo: `Una cartita para ${el} ♡`,
+    corto: `Escríbele a ${el}`,
+    descripcion: 'Un rinconcito para que me escribas',
   },
   extranes: {
     titulo: 'Para cuando me extrañes',
@@ -109,7 +114,7 @@ export const inicio = {
 /* ------------------------------------------------------------------ */
 
 export const mundo = {
-  antetitulo: `bienvenida, ${ella}, a`,
+  antetitulo: `bienvenida, ${ella}`,
   subtitulo: 'Hay algunas cositas que quiero enseñarte. Empieza por donde quieras.',
   melodyDice: '¿Por dónde empezamos?',
   kittyDice: '¡Todo esto es para ti!',
@@ -159,7 +164,7 @@ export const cositas = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Nuestros pequeños momentos  ·  /recuerditos                         */
+/* Cuando estoy contigo todo es mejor  ·  /recuerditos                 */
 /* ------------------------------------------------------------------ */
 
 export type Recuerdo = {
@@ -168,6 +173,11 @@ export type Recuerdo = {
    * Mientras sea `undefined` se muestra un marquito de ejemplo.
    */
   foto?: string
+  /**
+   * Opcional: qué parte de la foto se ve en la miniatura cuadrada del álbum, como en CSS
+   * ('50% 20%' = centrada y hacia arriba). Al abrirla, la foto se ve completa.
+   */
+  encuadre?: string
   titulo: string
   /** Opcional: si lo dejas vacío, no se muestra. */
   fecha?: string
@@ -175,21 +185,34 @@ export type Recuerdo = {
 }
 
 export const recuerditos = {
-  antetitulo: 'el álbum de',
+  antetitulo: 'nuestro álbum',
   intro: 'Hay momentos que parecen pequeños, pero que a mí me gusta recordar.',
   pista: 'Toca una foto para verla de cerquita',
+  pistaGirar: 'Arrastra la foto para darle la vuelta ↻',
   placeholderFoto: 'aquí va una foto',
   verFoto: (titulo: string) => `Ver la foto: ${titulo}`,
   anterior: 'Foto anterior',
   siguiente: 'Foto siguiente',
   contador: (actual: number, total: number) => `${actual} de ${total}`,
   fotos: [
-    { foto: undefined, titulo: 'Este día', fecha: '', texto: 'No sé si te acuerdas de este día, pero yo sí ♡' },
-    { foto: undefined, titulo: 'Un ratito', fecha: '', texto: 'Me gusta mucho esta foto. Cada vez que la veo me dan ganas de volver a ese día.' },
-    { foto: undefined, titulo: 'Nosotros', fecha: '', texto: 'Aquí salimos bonitos. Bueno, tú más.' },
-    { foto: undefined, titulo: 'Tú', fecha: '', texto: 'Esta la tengo guardada hace rato. Me gusta cómo sales.' },
+    {
+      foto: '/assets/fotos/01-wafles.webp',
+      titulo: 'Los wafles',
+      fecha: '',
+      texto: `El día que fuimos a comer wafles. La verdad no me terminaron de encantar los wafles, pero tuve la mejor compañía. Te quiero mucho, mi linda ${ella} ♡`,
+    },
+    {
+      foto: '/assets/fotos/02-pantuflas.webp',
+      encuadre: '50% 78%',
+      titulo: 'Día hermoso',
+      fecha: '',
+      texto:
+        'Me encantó este día, fue muy bonito: comimos, caminamos, nos besamos mucho, te compré cositas y, al final de todo, los zapatos se te dañaron y tuvimos que caminar todo el Jockey para buscarte unas pantuflas. Te quiero, mujer hermosa ♡',
+    },
+    { foto: '/assets/fotos/03-nosotros.webp', encuadre: '50% 12%', titulo: 'Nosotros', fecha: '', texto: 'Una foto de nosotros bastante casual, pero no deja de encantarme.' },
     { foto: undefined, titulo: 'Otra más', fecha: '', texto: 'Hay fotos que no son perfectas, pero son de mis favoritas igual.' },
     { foto: undefined, titulo: 'Lo que falta', fecha: '', texto: 'Todavía nos faltan un montón de fotos para este álbum.' },
+    { foto: undefined, titulo: 'Tú', fecha: '', texto: 'Esta la tengo guardada hace rato. Me gusta cómo sales.' },
   ] satisfies Recuerdo[],
 }
 
@@ -221,6 +244,8 @@ export const cartita = {
 export const cartaEspecial = {
   antetitulo: 'una cartita especial',
   etiquetaSobre: `Para ${ella}, de ${el}`,
+  /** Foto pegada en la esquina de la carta, tipo polaroid. Sin `archivo`, vuelve la estampilla de Melody. */
+  foto: { archivo: '/assets/fotos/carta-especial.webp', alt: `${ella} con su ramo de flores`, ver: 'Ver la foto en grande' },
   abrir: 'Abrir la cartita especial',
   pistaCerrada: 'Toca el sobre cuando estés lista ♡',
   pistaReleer: 'Puedes volver a abrirla las veces que quieras',
@@ -292,4 +317,56 @@ export const noEncontrado = {
   titulo: 'Uy, por aquí no hay nada',
   texto: `Creo que te perdiste un poquito, ${ella}. Ven, te llevo de vuelta.`,
   boton: 'Volver al mundito',
+}
+
+/* ------------------------------------------------------------------ */
+/* Una cartita para Ángel  ·  /carta-para-angel                        */
+/* ------------------------------------------------------------------ */
+
+/** Apodo que aparece al entrar; ella puede cambiarlo libremente. */
+export const APODO_INICIAL = el
+export const APODO_MAXIMO = 30
+export const CARTA_MAXIMO = 5000
+
+export const cartaParaAngel = {
+  antetitulo: 'tu escritorio de cartitas',
+  /** El título queda: "Una cartita para [apodo] ♡" (el apodo y el corazón los pone la página). */
+  tituloInicio: 'Una cartita para',
+  subtitulo: `Este rinconcito es tuyo, ${ella}. Puedes escribirme lo que quieras, que me encantará leerte.`,
+  apodo: {
+    etiqueta: '¿Cómo quieres llamarme? ♡',
+    sugerencias: ['Bebé', 'Amor', 'Amorcito', 'Angelito', 'Mi niño'],
+    sugerenciasEtiqueta: 'Algunas ideas',
+    ayuda: (restantes: number) => `Te quedan ${restantes} letras`,
+    vacio: 'Escribe cómo quieres llamarme ♡',
+  },
+  mensaje: {
+    etiqueta: 'Tu cartita',
+    placeholder: (apodo: string) => `Hola, ${apodo}... ♡`,
+    contador: (usados: number, maximo: number) => `${usados.toLocaleString('es-PE')} / ${maximo.toLocaleString('es-PE')}`,
+    vacio: 'La cartita está vacía. Escríbeme algo, aunque sea cortito ♡',
+    largo: (maximo: number) => `La cartita es muy larga: el máximo es ${maximo.toLocaleString('es-PE')} letras.`,
+    borradorGuardado: 'Tu borrador se guarda solito en este navegador',
+  },
+  sobre: {
+    para: 'Para:',
+    de: `De: ${ella} 💗`,
+  },
+  boton: (apodo: string) => `Enviar a ${apodo} ♡`,
+  enviando: 'Enviando tu cartita…',
+  aviso: `Tu cartita le llega a ${el} por correo a través de Formspree, un servicio externo. Nadie más que él puede leerla.`,
+  exito: {
+    titulo: (apodo: string) => `Tu cartita para ${apodo} llegó correctamente ♡`,
+    texto: 'Ya está en camino a su buzón. Gracias por escribirme.',
+    otra: 'Escribir otra cartita',
+  },
+  error: {
+    titulo: 'Uy, tu cartita no se pudo enviar',
+    texto: 'No te preocupes: todo lo que escribiste sigue aquí. Inténtalo otra vez en un ratito.',
+    sinConfigurar: 'El buzón todavía no está conectado. Tu cartita sigue aquí guardada.',
+    sinConexion: 'Parece que no hay internet. Tu cartita sigue aquí guardada.',
+    reintentar: 'Intentar de nuevo',
+  },
+  /** Asunto del correo que recibe Ángel. */
+  asuntoCorreo: (apodo: string) => `💌 Nueva cartita de ${ella} para ${apodo}`,
 }

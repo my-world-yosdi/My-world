@@ -26,3 +26,4 @@ export function useParallax(): Parallax {
 
   return { x: sx, y: sy }
 }
+

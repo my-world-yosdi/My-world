@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { AnimatePresence, motion, type PanInfo } from 'motion/react'
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react'
+import { AnimatePresence, motion, useDragControls, useMotionValue, useReducedMotion, useSpring, type PanInfo } from 'motion/react'
 import { general, paginas, recuerditos, type Recuerdo } from '../../data/mensajes'
 import type { PersonajeId } from '../../data/personajes'
 import { marcarVisita } from '../../lib/visitas'
@@ -38,7 +38,18 @@ function FotoContenido({ recuerdo, indice }: { recuerdo: Recuerdo; indice: numbe
   const [fallo, setFallo] = useState(false)
   const [claro, oscuro] = paletas[indice % paletas.length]
   if (recuerdo.foto && !fallo) {
-    return <img className="foto__img" src={recurso(recuerdo.foto)} alt={recuerdo.titulo} loading="lazy" decoding="async" draggable={false} onError={() => setFallo(true)} />
+    return (
+      <img
+        className="foto__img"
+        src={recurso(recuerdo.foto)}
+        alt={recuerdo.titulo}
+        style={recuerdo.encuadre ? { objectPosition: recuerdo.encuadre } : undefined}
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+        onError={() => setFallo(true)}
+      />
+    )
   }
   return (
     <div className="foto__vacia" style={{ '--claro': claro, '--oscuro': oscuro } as CSSProperties}>
@@ -51,6 +62,61 @@ function FotoContenido({ recuerdo, indice }: { recuerdo: Recuerdo; indice: numbe
         <Corazon ancho={16} color="#fff" /> {recuerditos.placeholderFoto}
       </span>
     </div>
+  )
+}
+
+/**
+ * Polaroid del visor que se puede girar en 3D arrastrándola con el mouse.
+ * Atrás tiene el reverso de la foto, con el título escrito a mano.
+ * Al soltarla queda de frente o de espaldas, nunca de canto. Con el dedo no gira:
+ * el arrastre sigue sirviendo para pasar de foto.
+ */
+function PolaroidGiratoria({ recuerdo, indice }: { recuerdo: Recuerdo; indice: number }) {
+  const reducir = useReducedMotion()
+  const giroY = useMotionValue(0)
+  const giroX = useMotionValue(0)
+  const rotateY = useSpring(giroY, { stiffness: 90, damping: 18, mass: 0.8 })
+  const rotateX = useSpring(giroX, { stiffness: 90, damping: 18, mass: 0.8 })
+  const arrastre = useRef<{ x: number; y: number; giroY: number; giroX: number; ultimoX: number; ultimoT: number; vel: number } | null>(null)
+
+  const empezar = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse' || reducir) return
+    e.stopPropagation()
+    e.currentTarget.setPointerCapture(e.pointerId)
+    arrastre.current = { x: e.clientX, y: e.clientY, giroY: giroY.get(), giroX: giroX.get(), ultimoX: e.clientX, ultimoT: e.timeStamp, vel: 0 }
+  }
+  const mover = (e: PointerEvent<HTMLDivElement>) => {
+    const a = arrastre.current
+    if (!a) return
+    a.vel = (e.clientX - a.ultimoX) / Math.max(e.timeStamp - a.ultimoT, 1)
+    a.ultimoX = e.clientX
+    a.ultimoT = e.timeStamp
+    giroY.set(a.giroY + (e.clientX - a.x) * 0.7)
+    giroX.set(Math.max(-35, Math.min(35, a.giroX - (e.clientY - a.y) * 0.4)))
+  }
+  const soltar = () => {
+    const a = arrastre.current
+    if (!a) return
+    arrastre.current = null
+    // Un empujón rápido le da más vueltas
+    giroY.set(Math.round((giroY.get() + a.vel * 250) / 180) * 180)
+    giroX.set(0)
+  }
+
+  return (
+    <motion.div className="giro" style={{ rotateX, rotateY }} onPointerDown={empezar} onPointerMove={mover} onPointerUp={soltar} onPointerCancel={soltar}>
+      <div className="giro__cara giro__frente">
+        <span className={`polaroid__cinta cinta--${cintas[indice % cintas.length]}`} aria-hidden="true" />
+        <span className="polaroid__foto">
+          <FotoContenido recuerdo={recuerdo} indice={indice} />
+        </span>
+        <span className="polaroid__pie texto-mano">{recuerdo.titulo}</span>
+      </div>
+      <div className="giro__cara giro__dorso" aria-hidden="true">
+        <span className="giro__dorso-titulo texto-mano">{recuerdo.titulo}</span>
+        <Corazon ancho={26} color="#F28AAE" />
+      </div>
+    </motion.div>
   )
 }
 
@@ -73,6 +139,7 @@ export default function Recuerditos() {
   const [navegado, setNavegado] = useState(false)
   const [direccion, setDireccion] = useState(1)
   const visorRef = useRef<HTMLDivElement>(null)
+  const deslizarFoto = useDragControls()
   const total = fotos.length
 
   useEffect(() => marcarVisita('recuerditos'), [])
@@ -118,7 +185,9 @@ export default function Recuerditos() {
             {recuerditos.antetitulo}
           </motion.p>
           <motion.h1 className="titulo-display album__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.3, ease: suave }}>
-            <span className="album__titulo-papel">{paginas.recuerditos.titulo}</span>
+            <span className="album__titulo-papel">
+              {paginas.recuerditos.titulo} <Corazon className="album__titulo-corazon" color="#F28AAE" />
+            </span>
           </motion.h1>
           <TypewriterOnScroll className="texto-intro album__intro texto-mano" text={recuerditos.intro} speed={34} delay={700} />
         </header>
@@ -190,15 +259,14 @@ export default function Recuerditos() {
                     exit="sale"
                     transition={{ type: 'spring', stiffness: 190, damping: 26 }}
                     drag="x"
+                    dragListener={false}
+                    dragControls={deslizarFoto}
+                    onPointerDown={(e) => deslizarFoto.start(e)}
                     dragConstraints={{ left: 0, right: 0 }}
                     dragElastic={0.35}
                     onDragEnd={alSoltar}
                   >
-                    <span className={`polaroid__cinta cinta--${cintas[abierta % cintas.length]}`} aria-hidden="true" />
-                    <span className="polaroid__foto">
-                      <FotoContenido recuerdo={actual} indice={abierta} />
-                    </span>
-                    <span className="polaroid__pie texto-mano">{actual.titulo}</span>
+                    <PolaroidGiratoria recuerdo={actual} indice={abierta} />
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -215,6 +283,7 @@ export default function Recuerditos() {
                 {actual.fecha && <p className="visor__fecha">{actual.fecha}</p>}
                 <TypewriterOnScroll id="visor-texto" className="visor__texto texto-mano" text={actual.texto} speed={30} delay={500} />
                 <p className="visor__contador" aria-live="polite">{recuerditos.contador(abierta + 1, total)}</p>
+                <p className="visor__giro" aria-hidden="true">{recuerditos.pistaGirar}</p>
               </motion.div>
 
               <button type="button" className="visor__flecha visor__flecha--izq" onClick={() => mover(-1)} aria-label={recuerditos.anterior}>

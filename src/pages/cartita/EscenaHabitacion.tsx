@@ -1,9 +1,12 @@
 import { Guirnalda, Mono, Nube, Corazon, LINEA } from '../../components/decor/Adornos'
 import { Particulas } from '../../components/decor/Particulas'
+import { CapaParallax } from '../../components/decor/CapaParallax'
+import { useParallax } from '../../hooks/useParallax'
 import { Personaje } from '../../components/personajes/Personaje'
 
 /** Habitación rosita: papel tapiz a rayas, ventana con cortinas, cuadro ovalado, zócalo y luz cálida. */
 export function EscenaHabitacion() {
+  const parallax = useParallax()
   return (
     <div className="escenario escena-cuarto">
       <div className="escena-cuarto__pared" />
@@ -49,7 +52,9 @@ export function EscenaHabitacion() {
       <div className="escena-cuarto__piso" />
       <div className="escena-cuarto__alfombra" />
 
-      <Particulas cantidad={12} modo="titila" semilla={91} tipos={['destello']} colores={['#fff', '#FFE08A']} tamano={[8, 16]} zona={[20, 80]} />
+      <CapaParallax parallax={parallax} profundidad={14}>
+        <Particulas cantidad={12} modo="titila" semilla={91} tipos={['destello']} colores={['#fff', '#FFE08A']} tamano={[8, 16]} zona={[20, 80]} />
+      </CapaParallax>
     </div>
   )
 }

@@ -32,12 +32,13 @@ type Lugar = {
 }
 
 const lugares: Lugar[] = [
-  { id: 'cositas', ruta: rutas.cositas, Dibujo: Frasco, pj: 'piano', x: 9, y: 42 },
-  { id: 'recuerditos', ruta: rutas.recuerditos, Dibujo: Polaroids, pj: 'twinStars', x: 25, y: 72 },
-  { id: 'cartita', ruta: rutas.cartita, Dibujo: Buzon, pj: 'flat', x: 41, y: 38 },
-  { id: 'especial', ruta: rutas.especial, Dibujo: SobreEspecial, pj: 'melody', x: 58, y: 70 },
-  { id: 'regalito', ruta: rutas.regalito, Dibujo: RegaloMini, pj: 'kitty', x: 75, y: 40 },
-  { id: 'extranes', ruta: rutas.extranes, Dibujo: Globo, pj: 'cinnamoroll', x: 91, y: 66 },
+  // Repartidos por el cielo, el río, la casita y el prado para no tapar a los personajes de la ilustración
+  { id: 'cositas', ruta: rutas.cositas, Dibujo: Frasco, pj: 'piano', x: 26, y: 64 },
+  { id: 'recuerditos', ruta: rutas.recuerditos, Dibujo: Polaroids, pj: 'twinStars', x: 36, y: 80 },
+  { id: 'cartita', ruta: rutas.cartita, Dibujo: Buzon, pj: 'flat', x: 20, y: 34 },
+  { id: 'especial', ruta: rutas.especial, Dibujo: SobreEspecial, pj: 'melody', x: 52, y: 14 },
+  { id: 'regalito', ruta: rutas.regalito, Dibujo: RegaloMini, pj: 'kitty', x: 34, y: 14 },
+  { id: 'extranes', ruta: rutas.extranes, Dibujo: Globo, pj: 'cinnamoroll', x: 5, y: 4 },
 ]
 
 export default function Mundo() {
@@ -181,17 +182,19 @@ export default function Mundo() {
                     </span>
                   </Inclinable>
                   <span className="lugar__cartel">
-                    <span className="lugar__nombre">{pagina.corto}</span>
+                    <span className="lugar__nombre">
+                      {pagina.corto}
+                      {visitado && (
+                        <span className="lugar__sello" title={mundo.visitado}>
+                          <Corazon ancho={12} color="#fff" />
+                          <span className="solo-lector">{mundo.visitado}</span>
+                        </span>
+                      )}
+                    </span>
                     <span className="lugar__desc" id={`lugar-desc-${lugar.id}`}>
                       {pagina.descripcion}
                     </span>
                   </span>
-                  {visitado && (
-                    <span className="lugar__sello" title={mundo.visitado}>
-                      <Corazon ancho={16} color="#fff" />
-                      <span className="solo-lector">{mundo.visitado}</span>
-                    </span>
-                  )}
                 </Link>
               </motion.li>
             )

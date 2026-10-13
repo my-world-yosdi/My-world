@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'motion/react'
 import { cartita, general, paginas } from '../../data/mensajes'
 import { marcarVisita } from '../../lib/visitas'
 import { useDialogo } from '../../hooks/useDialogo'
+import { useMusicaCarta } from '../../hooks/useMusicaCarta'
+import { musicaCartas } from '../../data/musica'
 import { Contenido } from '../../components/ui/Pagina'
 import { BotonVolver } from '../../components/ui/BotonVolver'
 import { BotonLazo } from '../../components/ui/BotonLazo'
@@ -28,6 +30,7 @@ export default function Cartita() {
   const [disparo, setDisparo] = useState(0)
   const [parrafo, setParrafo] = useState(0)
   const temporizadores = useRef<number[]>([])
+  const musica = useMusicaCarta(musicaCartas.cartita)
   const cartaRef = useRef<HTMLElement>(null)
 
   const abierto = fase !== 'cerrado'
@@ -46,6 +49,7 @@ export default function Cartita() {
   const abrir = () => {
     if (fase !== 'cerrado') return
     setFase('abriendo')
+    musica.reproducir()
     setParrafo(0)
     despues(1350, () => setDisparo((n) => n + 1))
     despues(2450, () => setFase('leyendo'))
@@ -54,6 +58,7 @@ export default function Cartita() {
   const guardar = () => {
     if (fase !== 'leyendo') return
     setFase('guardando')
+    musica.detener()
     setYaLeida(true)
     despues(900, () => setFase('cerrado'))
   }

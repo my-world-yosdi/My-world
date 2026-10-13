@@ -1,0 +1,328 @@
+/* =====================================================================
+   ♡ Una cartita para Ángel · escritorio de cartitas
+   Escrito primero para celular; las pantallas grandes amplían.
+   ===================================================================== */
+
+.cpa { overflow-x: clip; }
+
+/* ---------- Escenario ---------- */
+.escena-escritorio__pared {
+  inset: 0;
+  background:
+    var(--patron-corazones) 0 0 / 64px 64px,
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.5) 0 18px, transparent 18px 44px),
+    linear-gradient(180deg, #ffe4ee 0%, #fdd6e5 70%, #f9c9da 100%);
+}
+.escena-escritorio__luz {
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 38%, rgb(255 250 245 / 0.85), transparent 70%),
+    radial-gradient(ellipse 90% 70% at 50% 50%, transparent 60%, rgb(190 90 130 / 0.14));
+}
+.escena-escritorio__encaje { top: 0; left: 0; right: 0; rotate: 180deg; --t: 22px; z-index: 1; }
+.escena-escritorio__guirnalda { top: 14px; left: 0; width: 100%; height: 52px; z-index: 1; }
+.escena-escritorio__mono { top: 8px; z-index: 2; filter: drop-shadow(0 4px 6px rgb(200 90 130 / 0.3)); }
+.escena-escritorio__mono--izq { left: 6px; }
+.escena-escritorio__mono--der { right: 6px; animation-delay: -3s; }
+.escena-escritorio__mesa {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14vh;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.55), transparent 30%),
+    linear-gradient(180deg, #f6c0d3, #eeaec5);
+  box-shadow: 0 -2px 0 rgb(255 255 255 / 0.8), 0 -14px 30px -18px rgb(150 60 95 / 0.35);
+}
+.escena-escritorio__blonda { position: absolute; left: 0; right: 0; top: 0; --t: 18px; --c: #fff8f4; }
+.escena-escritorio__flor { bottom: 4vh; width: 34px; opacity: 0.9; z-index: 1; }
+.escena-escritorio__flor--1 { left: 5%; rotate: -12deg; }
+.escena-escritorio__flor--2 { right: 6%; width: 28px; rotate: 16deg; }
+
+/* ---------- Composición ---------- */
+.cpa__composicion {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  min-height: 100svh;
+  padding: 92px 14px 48px;
+}
+.cpa__cabecera { gap: 0; max-width: 40rem; }
+.cpa__titulo { font-size: clamp(1.75rem, 7.6vw, 3rem); text-wrap: balance; }
+.cpa__titulo-nombre { display: inline-block; color: var(--cereza-suave); font-style: italic; }
+.cpa__titulo-corazon { display: inline-block; width: 0.72em; height: auto; vertical-align: -0.04em; }
+.cpa__subtitulo { max-width: 46ch; }
+.nombre-animado { display: inline-block; }
+
+/* ---------- Hoja de la carta ---------- */
+.cpa-carta {
+  position: relative;
+  display: grid;
+  gap: 20px;
+  width: min(100%, 680px);
+  padding: 30px 18px 22px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 15% 0%, rgb(255 255 255 / 0.95), transparent 45%),
+    linear-gradient(160deg, #fffdfb, #fff4f7);
+  box-shadow:
+    inset 0 0 0 1.5px #fff,
+    inset 0 0 0 7px rgb(255 255 255 / 0.6),
+    inset 0 0 0 8.5px rgb(242 138 174 / 0.28),
+    var(--sombra-3);
+  transform-origin: 50% 100%;
+}
+/* costura punteada interior */
+.cpa-carta::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border-radius: 14px;
+  border: 1.5px dashed rgb(242 138 174 / 0.4);
+  pointer-events: none;
+}
+.cpa-carta__mono { position: absolute; top: -18px; left: 50%; translate: -50% 0; filter: drop-shadow(0 4px 5px rgb(200 90 130 / 0.3)); }
+.cpa-carta__cinta {
+  position: absolute;
+  top: -10px;
+  right: 22px;
+  width: 74px;
+  height: 22px;
+  rotate: 8deg;
+  background: repeating-linear-gradient(90deg, rgb(247 169 198 / 0.75) 0 7px, rgb(255 226 236 / 0.75) 7px 14px);
+  box-shadow: 0 1px 2px rgb(120 50 80 / 0.12);
+}
+
+.cpa-campo__etiqueta {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--f-display);
+  font-variation-settings: 'SOFT' 100;
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+/* Apodo */
+.cpa-apodo { position: relative; }
+.cpa-apodo__fila { display: grid; gap: 6px; }
+.cpa-apodo__input {
+  width: 100%;
+  padding: 0.6em 0.9em;
+  border: 0;
+  border-radius: 14px;
+  font: inherit;
+  font-family: var(--f-mano);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--cereza-oscuro);
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--rosa-300), inset 0 2px 4px rgb(150 60 95 / 0.06);
+  transition: box-shadow 0.3s;
+}
+.cpa-apodo__input:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--rosa-500), 0 0 0 4px rgb(247 169 198 / 0.35); }
+.cpa-apodo__input[aria-invalid] { box-shadow: inset 0 0 0 2px var(--cereza-suave); }
+.cpa-apodo__ayuda { font-size: 0.82rem; color: var(--tinta-suave); }
+.cpa-apodo__ayuda.es-error, .cpa-mensaje__ayuda.es-error { color: var(--cereza-oscuro); font-weight: 700; }
+
+.cpa-apodo__sugerencias { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.cpa-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.4em 0.95em;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--tinta-suave);
+  background: var(--rosa-50);
+  box-shadow: inset 0 0 0 1.5px var(--rosa-300);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.cpa-chip.esta-activa { color: #fff; background: var(--rosa-500); box-shadow: inset 0 0 0 1.5px #fff, var(--sombra-1); }
+@media (hover: hover) and (pointer: fine) {
+  .cpa-chip:not(.esta-activa):hover { color: var(--cereza); background: #fff; box-shadow: inset 0 0 0 1.5px var(--rosa-400), var(--sombra-1); }
+}
+.cpa-chip:disabled { opacity: 0.6; }
+
+/* Mensaje: papel de renglones */
+.cpa-mensaje { position: relative; }
+.cpa-mensaje__papel {
+  --renglon: 2.1rem;
+  display: block;
+  width: 100%;
+  min-height: calc(var(--renglon) * 8 + 1.2rem);
+  padding: 0.6rem 1rem;
+  border: 0;
+  border-radius: 14px;
+  resize: vertical;
+  font-family: var(--f-mano);
+  font-size: 1.42rem;
+  font-weight: 500;
+  line-height: var(--renglon);
+  color: var(--tinta);
+  background:
+    linear-gradient(90deg, transparent 2.1rem, rgb(242 138 174 / 0.35) 2.1rem 2.2rem, transparent 2.2rem) 0 0 / 100% 100% no-repeat,
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--renglon) - 1px), rgb(242 138 174 / 0.28) calc(var(--renglon) - 1px) var(--renglon)) 0 0.6rem / 100% var(--renglon) local,
+    #fff;
+  padding-left: 2.8rem;
+  box-shadow: inset 0 0 0 1.5px var(--rosa-300), inset 0 2px 6px rgb(150 60 95 / 0.06);
+  transition: box-shadow 0.3s;
+}
+.cpa-mensaje__papel::placeholder { color: rgb(134 86 106 / 0.55); }
+.cpa-mensaje__papel:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--rosa-500), 0 0 0 4px rgb(247 169 198 / 0.35); }
+.cpa-mensaje__papel[aria-invalid] { box-shadow: inset 0 0 0 2px var(--cereza-suave); }
+.cpa-mensaje__papel:disabled, .cpa-apodo__input:disabled { opacity: 0.75; }
+.cpa-mensaje__pie { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 6px; }
+.cpa-mensaje__ayuda { font-size: 0.82rem; color: var(--tinta-suave); }
+.cpa-mensaje__contador { flex: none; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: rgb(134 86 106 / 0.75); }
+.cpa-mensaje__contador.casi-lleno { color: var(--cereza); }
+
+/* Trampa para robots: fuera de la vista y del lector de pantalla */
+.cpa-trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ---------- Sobre y envío ---------- */
+.cpa-envio {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  width: min(100%, 680px);
+}
+.cpa-sobre {
+  --ancho: min(78vw, 300px);
+  position: relative;
+  width: var(--ancho);
+  margin-top: calc(var(--ancho) * 0.34);
+  perspective: 900px;
+}
+.cpa-sobre__cuerpo {
+  position: relative;
+  aspect-ratio: 100 / 64;
+  border-radius: 6px;
+  background: linear-gradient(170deg, #fde3ec, #f9cddc);
+  box-shadow: inset 0 0 0 2.2px var(--linea), var(--sombra-2);
+}
+.cpa-sobre__pliegues { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cpa-sobre__solapa {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52%;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+.cpa-sobre__solapa svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 2px 2px rgb(150 60 95 / 0.15)); }
+.cpa-sobre__estampilla {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  right: 6%;
+  width: 18%;
+  padding: 3px;
+  rotate: 6deg;
+  background: #fff;
+  box-shadow: var(--sombra-1);
+  outline: 2px dotted var(--rosa-400);
+  outline-offset: -3px;
+}
+.cpa-sobre__estampilla > * { background: var(--rosa-100); }
+.cpa-sobre__etiqueta {
+  position: absolute;
+  z-index: 1;
+  left: 9%;
+  right: 9%;
+  bottom: 10%;
+  padding: 0.35em 0.7em;
+  border-radius: 8px;
+  text-align: left;
+  line-height: 1.15;
+  background: rgb(255 255 255 / 0.85);
+  box-shadow: inset 0 0 0 1px rgb(242 138 174 / 0.4);
+}
+.cpa-sobre__para { font-size: clamp(1.15rem, 4.4vw, 1.4rem); font-weight: 700; color: var(--cereza-oscuro); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cpa-sobre__de { font-size: clamp(1rem, 3.8vw, 1.2rem); color: var(--tinta-suave); }
+.cpa-sobre__sello {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 52%;
+  width: 15%;
+  translate: -50% -60%;
+  filter: drop-shadow(0 3px 3px rgb(120 30 60 / 0.3));
+}
+.cpa-sobre__estallido { position: absolute; left: 50%; top: 30%; width: 0; height: 0; z-index: 4; }
+.cpa-sobre__melody {
+  position: absolute;
+  z-index: 3;
+  right: -22%;
+  bottom: -6%;
+  width: 40%;
+  filter: drop-shadow(0 6px 10px rgb(150 60 95 / 0.25));
+}
+
+.cpa-turnstile:empty { display: none; }
+.cpa-envio__acciones { display: grid; justify-items: center; width: 100%; }
+.cpa-envio__boton { display: grid; justify-items: center; gap: 14px; width: 100%; }
+.cpa-aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  max-width: 44ch;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  text-align: left;
+  color: var(--tinta-suave);
+}
+.cpa-aviso svg { flex: none; margin-top: 2px; color: var(--rosa-500); }
+
+/* Cargando: tres puntitos que laten */
+.cpa-cargando { display: inline-flex; align-items: center; gap: 10px; }
+.cpa-cargando__puntos { display: inline-flex; gap: 4px; }
+.cpa-cargando__puntos i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: cpa-latido 1s ease-in-out infinite; }
+.cpa-cargando__puntos i:nth-child(2) { animation-delay: 0.15s; }
+.cpa-cargando__puntos i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes cpa-latido { 0%, 100% { opacity: 0.35; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.1); } }
+.boton-lazo.esta-enviando { cursor: progress; }
+.boton-lazo:disabled { pointer-events: none; }
+
+.cpa-error {
+  width: min(100%, 460px);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  text-align: center;
+  color: var(--cereza-oscuro);
+  background: rgb(255 255 255 / 0.9);
+  box-shadow: inset 0 0 0 1.5px rgb(226 92 122 / 0.45), var(--sombra-1);
+}
+.cpa-error__titulo { font-weight: 800; }
+
+.cpa-exito { display: grid; justify-items: center; gap: 8px; max-width: 34rem; text-align: center; }
+.cpa-exito__titulo { font-family: var(--f-display); font-style: italic; font-size: clamp(1.4rem, 5.4vw, 2rem); line-height: 1.15; color: var(--tinta); text-wrap: balance; }
+.cpa-exito__texto { color: var(--tinta-suave); margin-bottom: 6px; }
+.cpa-envio.esta-enviada { margin-top: 2vh; }
+.cpa-envio.esta-enviada .cpa-sobre { margin-top: 24px; }
+
+/* ---------- Pantallas grandes ---------- */
+@media (min-width: 821px) {
+  .cpa__composicion { padding: 84px 32px 56px; gap: 22px; }
+  .cpa__titulo { font-size: clamp(2rem, min(3.6vw, 7vh), 3.3rem); }
+  .cpa-carta { padding: 38px 40px 28px; gap: 22px; }
+  .cpa-apodo__fila { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px; }
+  .cpa-envio { grid-template-columns: auto minmax(0, 1fr); align-items: center; justify-items: start; gap: 40px; }
+  .cpa-envio.esta-enviada { grid-template-columns: 1fr; justify-items: center; }
+  .cpa-envio__boton { justify-items: start; }
+  .cpa-sobre { --ancho: 260px; margin-top: 90px; }
+  .escena-escritorio__mono--izq { left: 18px; }
+  .escena-escritorio__mono--der { right: 18px; }
+}
+
+/* laptop baja: un poco más compacto */
+@media (min-width: 821px) and (max-height: 700px) {
+  .cpa__composicion { padding-top: 84px; }
+  .cpa-mensaje__papel { min-height: calc(var(--renglon) * 6 + 1.2rem); }
+}
