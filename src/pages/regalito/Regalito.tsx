@@ -54,10 +54,10 @@ export default function Regalito() {
 
       <div className="regalito__composicion contenido-escena">
         <header className="regalito__cabecera cabecera">
-          <motion.p className="antetitulo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: suave }}>
+          <motion.p className="antetitulo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: suave }}>
             {regalito.antetitulo}
           </motion.p>
-          <motion.h1 className="titulo-display regalito__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.32, ease: suave }}>
+          <motion.h1 className="titulo-display regalito__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.16, ease: suave }}>
             {paginas.regalito.titulo}
           </motion.h1>
         </header>
@@ -67,7 +67,7 @@ export default function Regalito() {
             className="regalito__zona"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.45, ease: suave }}
+            transition={{ duration: 0.8, delay: 0.22, ease: suave }}
           >
             <button
               type="button"

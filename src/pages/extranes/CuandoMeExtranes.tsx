@@ -210,19 +210,19 @@ export default function CuandoMeExtranes() {
 
       <div className="extranes__composicion contenido-escena">
         <header className="extranes__cabecera cabecera">
-          <motion.h1 className="titulo-display extranes__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.25, ease: suave }}>
+          <motion.h1 className="titulo-display extranes__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.12, ease: suave }}>
             {paginas.extranes.titulo}
           </motion.h1>
-          <TypewriterOnScroll className="texto-intro extranes__intro" text={extranes.intro} speed={26} delay={700} />
+          <TypewriterOnScroll className="texto-intro extranes__intro" text={extranes.intro} speed={26} delay={350} />
         </header>
 
-        <motion.div className="extranes__tendedero" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: suave }}>
+        <motion.div className="extranes__tendedero" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.25, ease: suave }}>
           {cuerdas.map((c) => (
             <Cuerda key={`${porCuerda}-${c.desde}`} sobres={c.sobres} desde={c.desde} />
           ))}
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.8, ease: suave }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.4, ease: suave }}>
           <Abrazo />
         </motion.div>
       </div>

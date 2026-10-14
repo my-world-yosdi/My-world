@@ -76,14 +76,14 @@ export default function Cartita() {
 
       <div className="cartita__composicion contenido-escena">
         <header className="cartita__cabecera cabecera">
-          <motion.p className="antetitulo cartita__ante" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: suave }}>
+          <motion.p className="antetitulo cartita__ante" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: suave }}>
             {cartita.sobreRemitente}
           </motion.p>
           <motion.h1
             className="titulo-display cartita__titulo"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: suave }}
+            transition={{ duration: 0.65, delay: 0.15, ease: suave }}
           >
             {paginas.cartita.titulo}
           </motion.h1>
@@ -93,7 +93,7 @@ export default function Cartita() {
           className="cartita__mesa-zona"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, delay: 0.4, ease: suave }}
+          transition={{ duration: 0.8, delay: 0.2, ease: suave }}
         >
           <button
             type="button"
@@ -239,7 +239,7 @@ export default function Cartita() {
             className="cartita__melody"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.9, ease: suave }}
+            transition={{ duration: 0.75, delay: 0.45, ease: suave }}
           >
             <span className="personaje-reactivo"><Personaje id="melody" /></span>
           </motion.div>

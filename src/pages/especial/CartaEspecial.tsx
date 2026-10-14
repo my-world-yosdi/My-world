@@ -114,10 +114,10 @@ export default function CartaEspecial() {
 
       <div className="cesp__composicion contenido-escena">
         <header className="cesp__cabecera cabecera">
-          <motion.p className="antetitulo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: suave }}>
+          <motion.p className="antetitulo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: suave }}>
             {cartaEspecial.antetitulo}
           </motion.p>
-          <motion.h1 className="titulo-display cesp__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.32, ease: suave }}>
+          <motion.h1 className="titulo-display cesp__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.16, ease: suave }}>
             {paginas.especial.titulo}
           </motion.h1>
         </header>
@@ -126,7 +126,7 @@ export default function CartaEspecial() {
           className="cesp__mesa"
           initial={{ opacity: 0, y: 26, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.45, ease: suave }}
+          transition={{ duration: 0.8, delay: 0.22, ease: suave }}
         >
           <span className="cesp__blonda" aria-hidden="true" />
 
@@ -294,7 +294,7 @@ export default function CartaEspecial() {
             className="cesp__melody"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.9, ease: suave }}
+            transition={{ duration: 0.75, delay: 0.45, ease: suave }}
           >
             <span className="personaje-reactivo"><Personaje id="melody" /></span>
           </motion.div>

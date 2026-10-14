@@ -183,15 +183,15 @@ export default function Recuerditos() {
 
       <div className="album contenido-escena">
         <header className="album__cabecera cabecera">
-          <motion.p className="antetitulo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: suave }}>
+          <motion.p className="antetitulo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: suave }}>
             {recuerditos.antetitulo}
           </motion.p>
-          <motion.h1 className="titulo-display album__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.3, ease: suave }}>
+          <motion.h1 className="titulo-display album__titulo" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.15, ease: suave }}>
             <span className="album__titulo-papel">
               {paginas.recuerditos.titulo} <Corazon className="album__titulo-corazon" color="#F28AAE" />
             </span>
           </motion.h1>
-          <TypewriterOnScroll className="texto-intro album__intro texto-mano" text={recuerditos.intro} speed={34} delay={700} />
+          <TypewriterOnScroll className="texto-intro album__intro texto-mano" text={recuerditos.intro} speed={34} delay={350} />
         </header>
 
         <ul className="album__fotos">
@@ -205,7 +205,7 @@ export default function Recuerditos() {
                 style={{ '--rot': `${d.rot}deg`, '--desnivel': `${d.y}px` } as CSSProperties}
                 initial={{ opacity: 0, y: 40, rotate: d.rot * 2 }}
                 animate={{ opacity: 1, y: 0, rotate: 0 }}
-                transition={{ duration: 0.9, delay: 0.45 + i * 0.09, ease: suave }}
+                transition={{ duration: 0.65, delay: 0.25 + i * 0.06, ease: suave }}
               >
                 <Inclinable grados={7} className="album__inclinable">
                   <motion.button
@@ -231,7 +231,7 @@ export default function Recuerditos() {
           })}
         </ul>
 
-        <motion.p className="album__pista texto-mano" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4, duration: 1 }}>
+        <motion.p className="album__pista texto-mano" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.7 }}>
           <Corazon ancho={14} color="#E25C7A" /> {recuerditos.pista}
         </motion.p>
       </div>

@@ -71,7 +71,7 @@ export default function CartaParaAngel() {
           className="cabecera cpa__cabecera"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15, ease: suave }}
+          transition={{ duration: 0.6, delay: 0.08, ease: suave }}
         >
           <p className="antetitulo">{textos.antetitulo}</p>
           <h1 className="titulo-display cpa__titulo">
@@ -90,7 +90,7 @@ export default function CartaParaAngel() {
               noValidate
               onSubmit={alEnviar}
               initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.3, ease: suave } }}
+              animate={{ opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.15, ease: suave } }}
               // Al enviarse, la hoja se dobla y baja hacia el sobre
               exit={{ opacity: 0, y: 140, scaleY: 0.25, scaleX: 0.7, rotateX: 40, transition: { duration: 0.7, ease: [0.5, 0, 0.75, 0] } }}
               aria-busy={enviando}

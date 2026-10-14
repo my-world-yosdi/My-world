@@ -85,7 +85,7 @@ export default function Mundo() {
           className="antetitulo"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: suave }}
+          transition={{ duration: 0.6, delay: 0.1, ease: suave }}
         >
           {mundo.antetitulo}
         </motion.p>
@@ -93,7 +93,7 @@ export default function Mundo() {
           className="mundo__titulo-cinta"
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: suave }}
+          transition={{ duration: 0.65, delay: 0.15, ease: suave }}
         >
           <CintaBanner className="mundo__cinta" color="#F7A9C6" />
           <h1 className="titulo-display mundo__titulo">{paginas.mundo.titulo}</h1>
@@ -102,7 +102,7 @@ export default function Mundo() {
           className="texto-intro"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: suave }}
+          transition={{ duration: 0.6, delay: 0.25, ease: suave }}
         >
           {mundo.subtitulo}
         </motion.p>
@@ -120,7 +120,7 @@ export default function Mundo() {
                 fill="none"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ duration: 2.4, delay: 0.5, ease: suave }}
+                transition={{ duration: 1.6, delay: 0.25, ease: suave }}
               />
             </mask>
           </defs>
@@ -135,7 +135,7 @@ export default function Mundo() {
           className="mundo__anfitrionas"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.7, ease: suave }}
+          transition={{ duration: 0.75, delay: 0.35, ease: suave }}
         >
           <button type="button" className="mundo__anfitriona mundo__anfitriona--melody personaje-reactivo" onClick={() => saludar('melody')} aria-label="Saludar a My Melody">
             <Personaje id="melody" />
@@ -158,7 +158,7 @@ export default function Mundo() {
                 style={{ '--x': `${lugar.x}%`, '--y': `${lugar.y}%` } as CSSProperties}
                 initial={{ opacity: 0, y: 26 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.6 + i * 0.12, ease: suave }}
+                transition={{ duration: 0.65, delay: 0.3 + i * 0.07, ease: suave }}
               >
                 <Link
                   to={lugar.ruta}

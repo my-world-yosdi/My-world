@@ -20,12 +20,12 @@ const suave = [0.22, 0.8, 0.26, 1] as const
 
 /** Orden de aparición: primero las dos protagonistas, luego sus amigos alrededor. */
 const elenco: { id: PersonajeId; desde: { x?: number; y?: number }; retraso: number; burbuja: 'abajo' | 'izquierda' | 'derecha' }[] = [
-  { id: 'melody', desde: { y: 40 }, retraso: 0.55, burbuja: 'abajo' },
-  { id: 'kitty', desde: { x: -30, y: 30 }, retraso: 0.75, burbuja: 'abajo' },
-  { id: 'piano', desde: { x: 30, y: 20 }, retraso: 0.95, burbuja: 'abajo' },
-  { id: 'flat', desde: { y: 30 }, retraso: 1.05, burbuja: 'abajo' },
-  { id: 'cinnamoroll', desde: { x: 60, y: -20 }, retraso: 1.25, burbuja: 'derecha' },
-  { id: 'twinStars', desde: { x: -40, y: -20 }, retraso: 1.35, burbuja: 'izquierda' },
+  { id: 'melody', desde: { y: 40 }, retraso: 0.3, burbuja: 'abajo' },
+  { id: 'kitty', desde: { x: -30, y: 30 }, retraso: 0.4, burbuja: 'abajo' },
+  { id: 'piano', desde: { x: 30, y: 20 }, retraso: 0.5, burbuja: 'abajo' },
+  { id: 'flat', desde: { y: 30 }, retraso: 0.55, burbuja: 'abajo' },
+  { id: 'cinnamoroll', desde: { x: 60, y: -20 }, retraso: 0.65, burbuja: 'derecha' },
+  { id: 'twinStars', desde: { x: -40, y: -20 }, retraso: 0.7, burbuja: 'izquierda' },
 ]
 
 export default function Inicio() {
@@ -62,13 +62,13 @@ export default function Inicio() {
       <div className="inicio__composicion contenido-escena">
         {/* Texto */}
         <section className="inicio__texto" aria-labelledby="inicio-titulo">
-          <TypewriterOnScroll className="antetitulo inicio__antetitulo" text={inicio.antetitulo} speed={75} delay={300} duracionMaxima={2000} />
+          <TypewriterOnScroll className="antetitulo inicio__antetitulo" text={inicio.antetitulo} speed={75} delay={150} duracionMaxima={2000} />
           <h1 id="inicio-titulo" className="titulo-display inicio__titulo">
             <motion.span
               className="inicio__titulo-linea"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4, ease: suave }}
+              transition={{ duration: 0.75, delay: 0.2, ease: suave }}
             >
               {inicio.tituloInicio}
             </motion.span>{' '}
@@ -76,7 +76,7 @@ export default function Inicio() {
               className="inicio__titulo-nombre"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, delay: 0.6, ease: suave }}
+              transition={{ duration: 0.8, delay: 0.3, ease: suave }}
             >
               {inicio.tituloNombre}
               <svg className="inicio__subrayado" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true">
@@ -88,17 +88,17 @@ export default function Inicio() {
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.2, delay: 1.3, ease: suave }}
+                  transition={{ duration: 0.85, delay: 0.65, ease: suave }}
                 />
               </svg>
             </motion.em>
           </h1>
-          <TypewriterOnScroll className="texto-intro inicio__subtitulo" text={inicio.subtitulo} speed={40} delay={1500} duracionMaxima={4000} />
+          <TypewriterOnScroll className="texto-intro inicio__subtitulo" text={inicio.subtitulo} speed={40} delay={750} duracionMaxima={4000} />
           <motion.div
             className="inicio__accion"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.15, ease: suave }}
+            transition={{ duration: 0.75, delay: 0.6, ease: suave }}
           >
             <BotonLazo variante="cereza" onClick={entrar} onPointerEnter={() => precargar(rutas.mundo)}>
               {inicio.boton}
@@ -116,7 +116,7 @@ export default function Inicio() {
               className="inicio__marco"
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: suave }}
+              transition={{ duration: 0.85, delay: 0.15, ease: suave }}
             >
               <MarcoOval />
               <Mono className="inicio__marco-mono" color="#E25C7A" />
@@ -126,13 +126,13 @@ export default function Inicio() {
               aria-hidden="true"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.4, delay: 0.5, ease: suave }}
+              transition={{ duration: 1, delay: 0.25, ease: suave }}
             />
             <motion.div
               className="inicio__pedestal"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.45, ease: suave }}
+              transition={{ duration: 0.75, delay: 0.25, ease: suave }}
             >
               <Nube contorno />
             </motion.div>
@@ -143,7 +143,7 @@ export default function Inicio() {
                 className={`inicio__pj inicio__pj--${id}`}
                 initial={{ opacity: 0, x: desde.x ?? 0, y: desde.y ?? 0 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 1.1, delay: retraso, ease: suave }}
+                transition={{ duration: 0.8, delay: retraso, ease: suave }}
               >
                 <div className="inicio__pj-vaiven">
                   <button
@@ -166,7 +166,7 @@ export default function Inicio() {
         className="inicio__firma texto-mano"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1.2 }}
+        transition={{ delay: 1, duration: 0.8 }}
       >
         {inicio.firma}
       </motion.p>
@@ -178,14 +178,14 @@ export default function Inicio() {
           aria-hidden="true"
           initial={{ clipPath: `circle(0px at ${salida.x}px ${salida.y}px)` }}
           animate={{ clipPath: `circle(${salida.r}px at ${salida.x}px ${salida.y}px)` }}
-          transition={{ duration: 1.05, ease: [0.65, 0, 0.35, 1] }}
+          transition={{ duration: 0.75, ease: [0.65, 0, 0.35, 1] }}
           onAnimationComplete={() => navigate(rutas.mundo)}
         >
           <motion.div
             className="inicio__iris-centro"
             initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: suave }}
+            transition={{ duration: 0.55, delay: 0.15, ease: suave }}
           >
             <Mono ancho={120} color="#E25C7A" />
           </motion.div>
