@@ -102,16 +102,19 @@
 .album__titulo-corazon { display: inline-block; width: 0.78em; height: auto; vertical-align: -0.04em; margin-left: 0.08em; }
 .album__intro { margin-top: 0.4rem; max-width: 46ch; font-size: clamp(1.25rem, min(1.7vw, 3.6vh), 1.6rem); line-height: 1.2; }
 
+/* Flex en vez de grid: la última fila incompleta queda centrada, sin huecos a un lado */
 .album__fotos {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 250px));
+  --ancho: clamp(150px, min(13.4vw, 30vh), 250px);
+  --hueco: clamp(14px, 1.7vw, 30px);
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: clamp(30px, 5vh, 52px) clamp(14px, 1.7vw, 30px);
+  gap: clamp(30px, 5vh, 52px) var(--hueco);
   margin-top: clamp(22px, 4.4vh, 46px);
 }
 .album__item {
   position: relative;
-  width: min(100%, clamp(150px, min(13.4vw, 30vh), 250px));
+  width: min(100%, var(--ancho));
   justify-self: center;
   rotate: var(--rot);
   translate: 0 var(--desnivel);
@@ -335,15 +338,18 @@
 
 /* ---------- Pantallas medianas: 3 columnas ---------- */
 @media (max-width: 1200px) {
-  .album__fotos { grid-template-columns: repeat(3, minmax(0, 250px)); }
-  .album__item { width: min(100%, clamp(150px, 22vw, 250px)); }
+  .album__fotos {
+    --ancho: clamp(150px, 22vw, 250px);
+    max-width: calc(3 * var(--ancho) + 2 * var(--hueco) + 1px);
+    margin-inline: auto;
+  }
 }
 
 /* ---------- Tablet y móvil ---------- */
 @media (max-width: 820px) {
   .album { margin-top: 76px; }
-  .album__fotos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 18px; }
-  .album__item { width: auto; }
+  .album__fotos { --hueco: 18px; max-width: none; gap: 34px var(--hueco); }
+  .album__item { width: calc((100% - var(--hueco)) / 2); }
   .visor-fondo { padding: 70px 16px 90px; place-items: start center; }
   .visor { grid-template-columns: 1fr; justify-items: center; gap: 22px; }
   .visor__polaroid { width: min(84vw, 52svh, 440px); }

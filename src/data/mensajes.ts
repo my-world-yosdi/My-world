@@ -210,10 +210,11 @@ export const recuerditos = {
         'Me encantó este día, fue muy bonito: comimos, caminamos, nos besamos mucho, te compré cositas y, al final de todo, los zapatos se te dañaron y tuvimos que caminar todo el Jockey para buscarte unas pantuflas. Te quiero, mujer hermosa ♡',
     },
     { foto: '/assets/fotos/03-nosotros.webp', encuadre: '50% 12%', titulo: 'Nosotros', fecha: '', texto: 'Una foto de nosotros bastante casual, pero no deja de encantarme.' },
+    { foto: undefined, titulo: 'Lo que falta', fecha: '', texto: 'Todavía nos faltan un montón de fotos para este álbum.' },
     {
       foto: '/assets/fotos/04-espejo.webp',
       encuadre: '50% 34%',
-      titulo: 'Otra más',
+      titulo: 'Tú',
       fecha: '',
       // Texto largo: los párrafos se separan con una línea en blanco
       texto: [
@@ -227,8 +228,6 @@ export const recuerditos = {
         `De tu fiel admirador, que te quiere muchísimo.`,
       ].join('\n\n'),
     },
-    { foto: undefined, titulo: 'Lo que falta', fecha: '', texto: 'Todavía nos faltan un montón de fotos para este álbum.' },
-    { foto: undefined, titulo: 'Tú', fecha: '', texto: 'Esta la tengo guardada hace rato. Me gusta cómo sales.' },
   ] satisfies Recuerdo[],
 }
 
