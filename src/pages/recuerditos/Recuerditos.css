@@ -291,7 +291,22 @@
 .visor__nota-mono { position: absolute; top: -18px; right: -12px; rotate: 18deg; }
 .visor__titulo { font-family: var(--f-display); font-weight: 600; font-size: 1.5rem; color: var(--tinta); }
 .visor__fecha { font-family: var(--f-script); font-size: 1.5rem; color: var(--cereza-suave); }
-.visor__texto { margin-top: 0.4rem; font-size: clamp(1.45rem, 2vw, 1.8rem); line-height: 1.2; color: var(--tinta); }
+.visor__texto { margin-top: 0.4rem; font-size: clamp(1.45rem, 2vw, 1.8rem); line-height: 1.2; color: var(--tinta); white-space: pre-line; }
+/* Notas largas (cartas): más ancha, letra más chica y el texto se desplaza dentro */
+.visor:has(.visor__nota--larga) { grid-template-columns: auto minmax(0, 460px); }
+.visor__nota--larga .visor__texto {
+  max-height: calc(100svh - 210px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 8px;
+  font-size: clamp(1.2rem, 1.45vw, 1.42rem);
+  line-height: 1.3;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rosa-300) transparent;
+  /* Desvanecido abajo: avisa que hay más carta; el espacio extra deja leer bien la última línea */
+  padding-bottom: 2.2em;
+  mask-image: linear-gradient(180deg, #000 82%, transparent);
+}
 .visor__contador { margin-top: 0.8rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; color: var(--tinta-suave); }
 
 .visor__flecha, .visor__cerrar {
@@ -334,6 +349,8 @@
   .visor__polaroid { width: min(84vw, 52svh, 440px); }
   .visor__polaroid .foto__img { max-width: calc(84vw - 28px); max-height: 50svh; }
   .visor__nota { width: min(84vw, 440px); }
+  .visor:has(.visor__nota--larga) { grid-template-columns: 1fr; }
+  .visor__nota--larga .visor__texto { max-height: none; overflow: visible; padding-bottom: 0; mask-image: none; }
   .visor__flecha { top: auto; bottom: 18px; translate: none; }
   .visor__flecha--izq { left: calc(50% - 64px); }
   .visor__flecha--der { right: calc(50% - 64px); }

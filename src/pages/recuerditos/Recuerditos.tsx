@@ -16,6 +16,8 @@ import { EscenaScrapbook } from './EscenaScrapbook'
 import './Recuerditos.css'
 
 const suave = [0.22, 0.8, 0.26, 1] as const
+/** A partir de cuántas letras la nota se vuelve "carta": letra más chica y texto con scroll. */
+const TEXTO_LARGO = 400
 const fotos: Recuerdo[] = recuerditos.fotos
 
 /** Colores de los marquitos de ejemplo mientras no haya foto real. */
@@ -273,7 +275,7 @@ export default function Recuerditos() {
 
               <motion.div
                 key={`nota-${abierta}`}
-                className="visor__nota"
+                className={`visor__nota ${actual.texto.length > TEXTO_LARGO ? 'visor__nota--larga' : ''}`}
                 initial={{ opacity: 0, y: 14, rotate: 3 }}
                 animate={{ opacity: 1, y: 0, rotate: 1.5 }}
                 transition={{ duration: 0.6, delay: 0.25, ease: suave }}
@@ -281,7 +283,14 @@ export default function Recuerditos() {
                 <Mono className="visor__nota-mono" ancho={40} />
                 <h2 id="visor-titulo" className="visor__titulo">{actual.titulo}</h2>
                 {actual.fecha && <p className="visor__fecha">{actual.fecha}</p>}
-                <TypewriterOnScroll id="visor-texto" className="visor__texto texto-mano" text={actual.texto} speed={30} delay={500} />
+                <TypewriterOnScroll
+                  id="visor-texto"
+                  className="visor__texto texto-mano"
+                  text={actual.texto}
+                  speed={30}
+                  delay={500}
+                  duracionMaxima={Math.min(14000, Math.max(2600, actual.texto.length * 8))}
+                />
                 <p className="visor__contador" aria-live="polite">{recuerditos.contador(abierta + 1, total)}</p>
                 <p className="visor__giro" aria-hidden="true">{recuerditos.pistaGirar}</p>
               </motion.div>
