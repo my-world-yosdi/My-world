@@ -63,13 +63,13 @@ export default function CositasDeTi() {
 
       <div className="cositas__composicion contenido-escena">
         <header className="cositas__cabecera">
-          <motion.p className="antetitulo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: suave }}>
+          <motion.p className="antetitulo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: suave }}>
             {cositas.antetitulo}
           </motion.p>
-          <motion.h1 className="titulo-display cositas__titulo" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.32, ease: suave }}>
+          <motion.h1 className="titulo-display cositas__titulo" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.16, ease: suave }}>
             {paginas.cositas.titulo}
           </motion.h1>
-          <motion.p className="texto-intro" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.45, ease: suave }}>
+          <motion.p className="texto-intro" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.24, ease: suave }}>
             {cositas.intro}
           </motion.p>
           <motion.div
@@ -78,7 +78,7 @@ export default function CositasDeTi() {
             aria-label={cositas.progresoLargo(vistas.length, total)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
+            transition={{ delay: 0.35, duration: 0.6 }}
           >
             <ol className="cositas__progreso-corazones" aria-hidden="true">
               {cositas.lista.map((_, i) => (
@@ -96,7 +96,7 @@ export default function CositasDeTi() {
             className="frasco"
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.35, ease: suave }}
+            transition={{ duration: 0.8, delay: 0.12, ease: suave }}
           >
             <FrascoGrande />
             <div className="frasco__etiqueta" aria-hidden="true">
@@ -117,7 +117,7 @@ export default function CositasDeTi() {
                   onClick={() => abrir(i)}
                   initial={{ opacity: 0, y: -40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.8 + i * 0.07, ease: suave }}
+                  transition={{ duration: 0.6, delay: 0.35 + i * 0.05, ease: suave }}
                 >
                   <span className="frasco__corazon-vaiven">
                     <svg viewBox="0 0 100 95" aria-hidden="true">
@@ -131,10 +131,10 @@ export default function CositasDeTi() {
             })}
           </motion.div>
 
-          <motion.div className="cositas__pj cositas__pj--piano" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 0.9, ease: suave }}>
+          <motion.div className="cositas__pj cositas__pj--piano" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.45, ease: suave }}>
             <span className="personaje-reactivo"><Personaje id="piano" /></span>
           </motion.div>
-          <motion.div className="cositas__pj cositas__pj--flat" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 1, ease: suave }}>
+          <motion.div className="cositas__pj cositas__pj--flat" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.5, ease: suave }}>
             <span className="personaje-reactivo"><Personaje id="flat" /></span>
           </motion.div>
 
